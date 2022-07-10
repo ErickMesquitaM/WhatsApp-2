@@ -1,0 +1,38 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+    min-height: 90vh;
+}
+
+.logo{
+    width: 160px;
+    margin-bottom: 10px;
+}
+
+form{
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.info{
+    display: grid;
+    grid-template: .3fr 1fr .3fr 1fr  / 1fr 1fr;
+    gap: 0 20px;
+}
+
+label{
+    font-size: 14px;
+    margin: 2px 5px;
+}
+input{
+    margin-bottom: 5px;
+}
+
+.button{
+    margin: 20px 0 10px 0;
+}

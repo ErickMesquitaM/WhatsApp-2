@@ -1,0 +1,26 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+    min-height: 80vh;
+}
+
+
+.logo{
+    width: 200px;
+    margin-bottom: 50px;
+}
+
+.form{
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px 0;
+}
+
+a{
+    text-align: center;
+}

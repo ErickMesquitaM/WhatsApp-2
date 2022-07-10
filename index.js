@@ -7,9 +7,13 @@ const routers = require("./router/router")
 
 const app = express()
 
-app.set("views", path.join(__dirname, "public/pages"))
-app.set("view engine", "ejs")
+app.use(express.static('public/assets'))
+app.use('/css', express.static(__dirname + 'public/css'))
+app.use('/js', express.static(__dirname + 'public/js'))
+app.use('/img', express.static(__dirname + 'public/img'))
 
+app.set('views', path.join(__dirname, 'public/views'))
+app.set('view engine', 'ejs')
 
 mongoose.connect(process.env.MONGODB_PATH,
     { useNewUrlParser: true, useUnifiedTopology: true},
