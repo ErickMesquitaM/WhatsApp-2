@@ -1,43 +1,53 @@
 const User = require("../../models/user")
 const bcrypt = require("bcryptjs")
 
-const { registerValidate, loginValidate } = require("./validate")
+const validate = require("./validate")
+
+const datas = {
+    name: '',
+    lastName: '',
+    user: '',
+    phone: '',
+    email: '',
+    pwd: '',
+}
 
 const userController = {
     
     sign: async (req, res) => {
 
-        const {error} = registerValidate(req.body)
-        if (error){ return res.status(400).send(error.message + " erroaaaaaaaaaa") }
+        const {error} = validate.registerValidate(req.body)
+        if (error){ return res.status(400).send(error.message) }
 
         const selectedUser = await User.findOne({email: req.body.email})
-        if(selectedUser) return res.status(400).send("Email já registrado")
+        if( selectedUser ){ res.render("sign", { data: req.body }) }
 
-        res.send(req.body)
+        const user = new User({
+            name: req.body.name,
+            lastName: req.body.lastName,
+            user: req.body.user,
+            phone: req.body.phone,
+            email: req.body.email,
+            password: bcrypt.hashSync(req.body.pwd)
+        })
 
-    //     const user = new User({
-    //         name: req.body.name,
-    //         lastName: req.body.lastName,
-    //         user: req.body.user,
-    //         phone: req.body.phone,
-    //         email: req.body.email,
-    //         password: bcrypt.hashSync(req.body.pwd)
-    //     })
+        try{
+            await user.save()
 
-    //     try{
-    //         const savedUser = await user.save()
-    //         res.send(savedUser)
-    //     } catch (error) {
-    //         res.status(400).send(error)
-    //     }
+            const newUser = await User.findOne({email: req.body.email})
+            const token = jwt.sign({ _id: newUser._id }, process.env.token_secret)
+            res.header("user-token", token)
+
+            res.render("config")
+        } catch (error) {
+            res.status(400).send(error)
+        }
 
     }, 
 
     router: (req, res) => {
-        res.render("sign")
+        res.render("sign", {data: datas})
     }
-
-
 }
 
 

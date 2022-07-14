@@ -19,8 +19,32 @@ body{
     display: flex;
     flex-direction: column;
     gap: 15px 0;
+
+    position: relative;
 }
 
 a{
     text-align: center;
+}
+
+#iconEmail{
+    position: absolute;
+    top: 2.5px;
+    right: 0px;
+
+    color: red;
+    padding:  5px;
+}
+#msnEmail{
+    font-size: 14px;
+    padding: 3px 5px;
+    background-color: rgb(235, 154, 154);
+    border-radius: 3px 3px 0 3px;
+    
+    position: absolute;
+    top: -20px;
+    right: 25px;
+
+    display: none;
+    cursor: pointer;
 }

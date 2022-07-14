@@ -10,8 +10,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/sign.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 </head>
 <body>
+    
+    <div id="spin" class="spinner-border text-danger"></div>
 
     <img class="logo" src="img/logo.png" alt="">
 
@@ -22,60 +26,38 @@
             <label for="name">Name</label>
             <label for="lastName">Sobrenome</label>
 
-            <input class="form-control" id="name" name="name" type="text" required>
-            <input class="form-control" id="lastName" name="lastName" type="text" required>
+            <input class="form-control" id="name" name="name" type="text" value="<%= data.name %>" required>
+            <input class="form-control" id="lastName" name="lastName" type="text" value="<%= data.lastName %>" required>
     
             <label for="user">Usuário</label>
             <label for="phone">Número (opcional)</label>
 
-            <input class="form-control" id="user" name="user" type="text" required>
-            <input class="form-control" id="phone" name="phone"  onchange="resetBorder('phone')" type="tel" placeholder="DDD número (tudo junto)" min="11" max="11">
+            <input class="form-control" id="user" name="user" type="text" value="<%= data.user %>" required>
+            <input class="form-control" id="phone" name="phone"  onchange="resetBorder('phone')" value="<%= data.phone %>" type="tel" placeholder="DDD número (tudo junto)" min="11" max="11">
 
         </div>
 
         <label for="email">Email</label>
-        <input class="form-control" id="email" name="email" type="email" required>
+        <input class="form-control" id="email" name="email" type="email" value="<%= data.email %>" required>
 
         <label for="pwd">Senha</label>
-        <input class="form-control" id="pwd" name="pwd" type="password" required>
+        <input class="form-control" id="pwd" name="pwd" type="password" value="<%= data.pwd %>" required>
 
         <label for="confirmPwd">Confirme a senha</label>
-        <input class="form-control" onchange="resetBorder('confirmPwd')" id="confirmPwd" name="confirmPwd" type="password" required>
+        <input class="form-control" onchange="resetBorder('confirmPwd')" id="confirmPwd" name="confirmPwd" value="" type="password" required>
 
         <input type="button" onclick="validate()" class="btn btn-primary button" value="Criar conta">
         <a class="btn btn-success" href="/login">Já tenho conta</a>
 
+        <% try{ %>
+            <% if(data.email != ""){ %>
+                <span onclick="showMsnEmail()" id="iconEmail" class="material-icons"> error </span>
+                <span id="msnEmail">email indisponivel</span>
+            <% } %> 
+        <% } catch(err){ console.log(err) } %> 
+
     </form>
-    
-    <script>
 
-        var form = document.getElementById("form")
-
-
-        function validate(){
-            let pwd = document.getElementById("pwd")
-            let confirmPwd = document.getElementById("confirmPwd")
-            let phone = document.getElementById("phone")
-
-            if(pwd.value != confirmPwd.value){
-
-                confirmPwd.style.borderColor = "rgb(255, 70, 70)"
-            
-            } else if(isNaN(phone.value)){
-
-                phone.style.borderColor = "rgb(255, 70, 70)"
-            
-            } else {
-                form.submit()
-            }
-
-        }
-
-        function resetBorder(input){
-            document.getElementById(input).style.borderColor = "#ced4da"
-        }
-
-    </script>
-
+    <script src="js/sign.js"></script>
 </body>
 </html>

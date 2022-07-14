@@ -9,7 +9,8 @@ const controllerSign = require("../controllers/login/controllerSign")
 const controllerRecoverAccount = require("../controllers/controllerRecoverAccount")
 
 
-router.get("/login", express.json(), controllerLogin)
+router.get("/login", express.json(), controllerLogin.view)
+router.post("/login", express.urlencoded({extended: true}), controllerLogin.login)
 
 router.get("/sign", express.json(), controllerSign.router)
 router.post("/sign", express.urlencoded({extended: true}), controllerSign.sign)

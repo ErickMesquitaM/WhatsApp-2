@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-let uid = String( Date.now().toString(32) + Math.random().toString(16) ).replace(/\./g, '')
+// let uid = String( Date.now().toString(32) + Math.random().toString(16) ).replace(/\./g, '')
 
 
 const userSchema = mongoose.Schema({
@@ -12,9 +12,7 @@ const userSchema = mongoose.Schema({
     email: {type: String, required: true, minlength: 5, maxlength: 100},
     password: {type: String, required: true, minlength: 6, maxlength: 200},
 
-    uid: {type: String, default: uid},
     createdAt: {type: Date, default: Date.now},
-
 })
 
 module.exports = mongoose.model("User", userSchema)
