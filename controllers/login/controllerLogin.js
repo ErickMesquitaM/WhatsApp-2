@@ -26,13 +26,16 @@ const userControlls = {
         const token = jwt.sign({ _id: selectedUser._id }, process.env.token_secret)
 
         await res.header("user-token", token)
-        res.redirect("/config")
+        module.exports.token = token
+
+        await res.redirect("/config")
     },
 
     view: (req, res) => {
         res.render("login", {data: datas})
     }
-} //arrumar o token de registro
+}
+
 
 module.exports.view = userControlls.view
 module.exports.login = userControlls.login

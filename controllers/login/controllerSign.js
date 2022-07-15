@@ -20,7 +20,7 @@ const userController = {
         if (error){ return res.status(400).send(error.message) }
 
         const selectedUser = await User.findOne({email: req.body.email})
-        if( selectedUser ){ res.render("sign", { data: req.body }) }
+        if( selectedUser ){ return res.render("sign", { data: req.body }) }
 
         const user = new User({
             name: req.body.name,
@@ -36,9 +36,11 @@ const userController = {
 
             const newUser = await User.findOne({email: req.body.email})
             const token = jwt.sign({ _id: newUser._id }, process.env.token_secret)
-            res.header("user-token", token)
 
-            res.render("config")
+            await res.header("user-token", token)
+            module.exports.token = token
+
+            res.redirect("/config")
         } catch (error) {
             res.status(400).send(error)
         }
