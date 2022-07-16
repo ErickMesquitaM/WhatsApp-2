@@ -15,9 +15,7 @@
 </head>
 <body>
 
-    <div id="spin" class="spinner-border text-danger" style="display: block;"></div>
-
-    <form id="form" action="/config" method="post">
+    <form id="form" action="/config" method="post" enctype="multipart/form-data">
 
         <img src="data:image/<%=img.contentType%>;base64, <%=img.data.toString('base64')%>" id="img" class="labelImg" onclick="clickLabel()">
         <input type="file" name="inputImg" id="inputImg">
@@ -25,19 +23,19 @@
         <div id="info">
 
             <label for="name">Nome: </label>
-            <input type="text" name="name" id="name" value=" <%= user.name %>" minlength="3" maxlength="50" required>
+            <input type="text" name="name" id="name" value="<%=user.name%>" minlength="3" maxlength="50" required>
  
             <label for="lastName">Sobrenome: </label>
-            <input type="text" name="lastName" id="lastName" value="<%= user.lastName %>" minlength="3" maxlength="50" required>
+            <input type="text" name="lastName" id="lastName" value="<%=user.lastName%>" minlength="3" maxlength="50" required>
     
             <label for="user">Usuário: </label>
-            <input type="text" name="user" id="user" value="<%= user.user %>" minlength="3" maxlength="50" required>
+            <input type="text" name="user" id="user" value="<%=user.user%>" minlength="3" maxlength="50" required>
     
             <label for="phone">Número: </label>
-            <input type="tel" name="phone" id="phone" min="11" max="15"  value="<%= user.phone %>">
+            <input type="tel" name="phone" id="phone" min="11" max="15"  value="<%=user.phone%>">
     
             <label>Email: </label>
-            <p id="email"><%= user.email %></p>
+            <p id="email"><%=user.email%></p>
 
             <span onclick="showMsnEmail()" id="iconError" class="material-icons"> error </span>
 
@@ -47,7 +45,6 @@
         <a href="/rooms" class="btn btn-secondary btn-rooms">Salas</a>
 
     </form>
-
 
     <script src="js/config.js"></script>
 </body>

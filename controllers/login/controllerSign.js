@@ -37,8 +37,10 @@ const userController = {
             const newUser = await User.findOne({email: req.body.email})
             const token = jwt.sign({ _id: newUser._id }, process.env.token_secret)
 
-            await res.header("user-token", token)
+            await res.header("user-token", token) //problema na parte de criar novo usuario, n ta criando
             module.exports.token = token
+
+            console.log("vai redirecionar")
 
             res.redirect("/config")
         } catch (error) {

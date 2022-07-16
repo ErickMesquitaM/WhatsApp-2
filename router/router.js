@@ -1,5 +1,7 @@
 const express = require('express')
 const router = express.Router()
+const multer = require('multer')
+const upload = multer({ dest: 'uploads/' })
 
 const controllerConfig = require("../controllers/controllerConfig")
 const controllerInitial = require("../controllers/controllerInitial")
@@ -9,6 +11,7 @@ const controllerSign = require("../controllers/login/controllerSign")
 const controllerRecoverAccount = require("../controllers/controllerRecoverAccount")
 
 
+
 router.get("/login", express.json(), controllerLogin.view)
 router.post("/login", express.urlencoded({extended: true}), controllerLogin.login)
 
@@ -16,7 +19,7 @@ router.get("/sign", express.json(), controllerSign.router)
 router.post("/sign", express.urlencoded({extended: true}), controllerSign.sign)
 
 router.get("/config", express.json(), controllerConfig.configGet)
-router.post("/config", express.urlencoded({extended: true}), controllerConfig.configPost)
+router.post("/config",  upload.single('inputImg'), controllerConfig.configPost)
 
 router.get("/rooms", express.json(), controllerRooms)
 router.get("/recover-account", express.json(), controllerRecoverAccount)

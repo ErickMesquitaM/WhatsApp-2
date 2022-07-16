@@ -1,4 +1,4 @@
 
 module.exports = (req, res) => {
-    res.render("index")
+    res.send("Home")
 }
