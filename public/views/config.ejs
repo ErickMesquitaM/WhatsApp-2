@@ -10,39 +10,45 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/config.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 </head>
 <body>
 
     <div id="spin" class="spinner-border text-danger" style="display: block;"></div>
 
-    <form>
+    <form id="form" action="/config" method="post">
 
-        <label for="img" class="labelImg"></label>
-        <input type="file" name="img" id="img">
+        <img src="data:image/<%=img.contentType%>;base64, <%=img.data.toString('base64')%>" id="img" class="labelImg" onclick="clickLabel()">
+        <input type="file" name="inputImg" id="inputImg">
 
         <div id="info">
 
             <label for="name">Nome: </label>
-            <input type="text" name="name" id="name" value="srgsr" required>
-    
+            <input type="text" name="name" id="name" value=" <%= user.name %>" minlength="3" maxlength="50" required>
+ 
             <label for="lastName">Sobrenome: </label>
-            <input type="text" name="lastName" id="lastName" value="srgrs" required>
+            <input type="text" name="lastName" id="lastName" value="<%= user.lastName %>" minlength="3" maxlength="50" required>
     
             <label for="user">Usuário: </label>
-            <input type="text" name="user" id="user" value="srgrs" required>
+            <input type="text" name="user" id="user" value="<%= user.user %>" minlength="3" maxlength="50" required>
     
             <label for="phone">Número: </label>
-            <input type="tel" name="phone" id="phone" value="999543869">
+            <input type="tel" name="phone" id="phone" min="11" max="15"  value="<%= user.phone %>">
     
             <label>Email: </label>
-            <p id="email">erickmesqyuta322@gmail.com</p>
+            <p id="email"><%= user.email %></p>
+
+            <span onclick="showMsnEmail()" id="iconError" class="material-icons"> error </span>
 
         </div>
 
-        <button class="btn btn-success btn-save">Salvar</button>
+        <button type="button" id="button" class="btn btn-success btn-save">Salvar</button>
         <a href="/rooms" class="btn btn-secondary btn-rooms">Salas</a>
 
     </form>
 
+
+    <script src="js/config.js"></script>
 </body>
 </html>

@@ -15,7 +15,9 @@ router.post("/login", express.urlencoded({extended: true}), controllerLogin.logi
 router.get("/sign", express.json(), controllerSign.router)
 router.post("/sign", express.urlencoded({extended: true}), controllerSign.sign)
 
-router.get("/config", express.json(), controllerConfig)
+router.get("/config", express.json(), controllerConfig.configGet)
+router.post("/config", express.urlencoded({extended: true}), controllerConfig.configPost)
+
 router.get("/rooms", express.json(), controllerRooms)
 router.get("/recover-account", express.json(), controllerRecoverAccount)
 router.get("/", express.json(), controllerInitial)

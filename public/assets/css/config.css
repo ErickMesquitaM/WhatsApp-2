@@ -10,7 +10,7 @@ form{
     position: relative;
 }
 
-#img{
+#inputImg{
     display: none;
 }
 
@@ -47,11 +47,21 @@ input:focus{
     grid-template: auto / auto 1fr;
     gap: 10px 0;
     align-content: center;
+
+    position: relative;
 }
 #info > label{
     margin-top: 7px;
     font-weight: bolder;
+}
 
+#iconError{
+    position: absolute;
+    right: 5px;
+    top: 70%;
+    transform: translateY(-50%);
+    color: red;
+    display: none;
 }
 
 .btn-save, .btn-rooms{

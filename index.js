@@ -19,6 +19,7 @@ mongoose.connect(process.env.MONGODB_PATH,
     { useNewUrlParser: true, useUnifiedTopology: true},
     (error) => { if(error) throw error; console.log("Mongo Funcionando")
 })
+  
 
 app.use("/", express.json(), routers)
 

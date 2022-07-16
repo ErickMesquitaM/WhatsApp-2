@@ -21,6 +21,17 @@ const validate = {
             pwd: Joi.string().required().min(6).max(100)
         })
         return schema.validate(data)
+    },
+
+    updateValidate: (data) => {
+        const schema = Joi.object({
+            name: Joi.string().required().min(3).max(50),
+            lastName: Joi.string().required().min(3).max(50),
+            user: Joi.string().required().min(3).max(50),
+            phone: Joi.allow(),
+            email: Joi.string().required().min(3).max(100)
+        })
+        return schema.validate(data)
     }
 }
 
