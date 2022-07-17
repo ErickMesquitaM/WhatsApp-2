@@ -17,7 +17,7 @@ const userController = {
     sign: async (req, res) => {
 
         const {error} = validate.registerValidate(req.body)
-        if (error){ return res.status(400).send(error.message) }
+        if (error){ return res.status(400).render("sign", { data: req.body }) }
 
         const selectedUser = await User.findOne({email: req.body.email})
         if( selectedUser ){ return res.render("sign", { data: req.body }) }
@@ -30,15 +30,16 @@ const userController = {
         })
 
         try{
+            
+            await user.save()
 
             const newUser = await User.findOne({email: req.body.email})
-            const token = jwt.sign({ _id: newUser._id }, process.env.token_secret)
+            const token = jwt.sign({ _id: newUser._id }, process.env.token_secret, {expiresIn: "7d"})
           
             await res.header("user-token", token)
             module.exports.token = token
 
-            await user.save()
-            res.redirect("/config")
+            res.redirect("/my-account")
             
         } catch (error) {
             res.status(400).send("Erro ao criar o usuário: " + error)

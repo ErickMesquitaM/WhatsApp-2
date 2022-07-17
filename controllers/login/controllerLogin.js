@@ -23,12 +23,12 @@ const userControlls = {
         const passwordAndUserMatch = bcrypt.compareSync(req.body.pwd, selectedUser.password)
         if(!passwordAndUserMatch) return res.status(400).render("login", {data: req.body})
                 
-        const token = jwt.sign({ _id: selectedUser._id }, process.env.token_secret)
+        const token = jwt.sign({ _id: selectedUser._id }, process.env.token_secret, {expiresIn: "7d"})
 
         await res.header("user-token", token)
         module.exports.token = token
 
-        await res.redirect("/config")
+        await res.redirect("/my-account")
     },
 
     view: (req, res) => {

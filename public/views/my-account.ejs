@@ -15,7 +15,9 @@
 </head>
 <body>
 
-    <form id="form" action="/config" method="post" enctype="multipart/form-data">
+    <form id="form" action="/my-account" method="post" enctype="multipart/form-data">
+
+        <span onclick="logout()" id="logout" class="material-icons">logout</span>
 
         <img src="data:image/<%=img.contentType%>;base64, <%=img.data.toString('base64')%>" id="img" class="labelImg" onclick="clickLabel()">
         <input type="file" name="inputImg" id="inputImg">

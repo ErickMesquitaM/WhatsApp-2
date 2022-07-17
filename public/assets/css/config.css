@@ -74,3 +74,10 @@ input:focus{
 .btn-rooms{
     left: 40px;
 }
+
+#logout{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+}

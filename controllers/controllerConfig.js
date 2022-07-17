@@ -15,11 +15,12 @@ function uid(){ return String( Date.now().toString(32) + Math.random().toString(
 
 module.exports = {
         
-    configGet: async (req, res) => {
+    myAccount: async (req, res) => {
 
         var token = null
 
         if( req.header("user-token") ){
+            console.log("pegou o token do header")
             token = req.header("user-token")
         } else if( !controllerSign.token ){
             token = controllerLogin.token
@@ -38,7 +39,7 @@ module.exports = {
             Image.find({uid: user[0].image}, (err, items) => {
                 if (!err) {
 
-                    res.render("config", {user: user[0], img: items[0].img})
+                    res.render("my-account", {user: user[0], img: items[0].img})
                 } else {
                     res.status(500).send('Error: ' + err)
                 }
@@ -49,11 +50,12 @@ module.exports = {
         }
     },
 
-    configPost: async (req, res) => {
+    updateAccount: async (req, res) => {
 
         var token = null
 
         if( req.header("user-token") ){
+            console.log("pegou o token do header")
             token = req.header("user-token")
         } else if( !controllerSign.token ){
             token = controllerLogin.token
@@ -100,8 +102,8 @@ module.exports = {
         }
 
         async function updateFinily(){
-            await User.updateMany({ _id: user[0]._id }, { $set: { user: req.body.user, phone: req.body.phone } });
-            res.redirect("/config")
+            await User.updateMany({ _id: user[0]._id }, { $set: { user: req.body.user, phone: req.body.phone } })
+            res.redirect("/my-account")
         }
     }
 }

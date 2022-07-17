@@ -37,3 +37,7 @@ function validate(){
         form.submit()
     }
 }
+
+function logout(){
+    window.location.pathname = "/logout"
+}
