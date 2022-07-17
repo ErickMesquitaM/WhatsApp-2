@@ -4,8 +4,6 @@ const validate = {
     
     registerValidate: (data) => {
         const schema = Joi.object({
-            name: Joi.string().required().min(3).max(50),
-            lastName: Joi.string().required().min(3).max(50),
             user: Joi.string().required().min(3).max(50),
             phone: Joi.allow(),
             email: Joi.string().required().min(3).max(100),
@@ -25,8 +23,6 @@ const validate = {
 
     updateValidate: (data) => {
         const schema = Joi.object({
-            name: Joi.string().required().min(3).max(50),
-            lastName: Joi.string().required().min(3).max(50),
             user: Joi.string().required().min(3).max(50),
             phone: Joi.allow(),
             email: Joi.string().required().min(3).max(100)

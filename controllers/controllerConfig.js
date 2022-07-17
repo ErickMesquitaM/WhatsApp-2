@@ -11,8 +11,6 @@ const validate = require("./login/validate")
 
 
 function uid(){ return String( Date.now().toString(32) + Math.random().toString(16)).replace(/\./g, '')}
- // token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmQxOWJlYjNmOTFhNzQ1ZGJlNmUwOWEiLCJpYXQiOjE2NTc5ODExNjd9.xeLg0gzAP5Wq2Zgjq4OosbYQSkv4L_qQr4SeZZndSL4"
-
 
 
 module.exports = {
@@ -94,8 +92,7 @@ module.exports = {
 
                     updateFinily()
                 } else {
-                    res.send("deu erro na parte de criar a imagem")
-                    console.log(err)
+                    res.send(err)
                 }
             })
         } else {
@@ -103,8 +100,7 @@ module.exports = {
         }
 
         async function updateFinily(){
-
-            await User.updateMany({ _id: user[0]._id }, { $set: { name: req.body.name, lastName: req.body.lastName, user: req.body.user, phone: req.body.phone } });
+            await User.updateMany({ _id: user[0]._id }, { $set: { user: req.body.user, phone: req.body.phone } });
             res.redirect("/config")
         }
     }

@@ -1,11 +1,11 @@
+const jwt = require("jsonwebtoken")
+
 const User = require("../../models/user")
 const bcrypt = require("bcryptjs")
 
 const validate = require("./validate")
 
 const datas = {
-    name: '',
-    lastName: '',
     user: '',
     phone: '',
     email: '',
@@ -23,8 +23,6 @@ const userController = {
         if( selectedUser ){ return res.render("sign", { data: req.body }) }
 
         const user = new User({
-            name: req.body.name,
-            lastName: req.body.lastName,
             user: req.body.user,
             phone: req.body.phone,
             email: req.body.email,
@@ -32,21 +30,19 @@ const userController = {
         })
 
         try{
-            await user.save()
 
             const newUser = await User.findOne({email: req.body.email})
             const token = jwt.sign({ _id: newUser._id }, process.env.token_secret)
-
-            await res.header("user-token", token) //problema na parte de criar novo usuario, n ta criando
+          
+            await res.header("user-token", token)
             module.exports.token = token
 
-            console.log("vai redirecionar")
-
+            await user.save()
             res.redirect("/config")
+            
         } catch (error) {
-            res.status(400).send(error)
+            res.status(400).send("Erro ao criar o usuário: " + error)
         }
-
     }, 
 
     router: (req, res) => {
