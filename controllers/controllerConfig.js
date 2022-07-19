@@ -55,7 +55,6 @@ module.exports = {
         var token = null
 
         if( req.header("user-token") ){
-            console.log("pegou o token do header")
             token = req.header("user-token")
         } else if( !controllerSign.token ){
             token = controllerLogin.token

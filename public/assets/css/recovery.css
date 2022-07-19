@@ -1,0 +1,44 @@
+
+:root{
+    --width: 500px;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo{
+    width: 200px;
+    margin: 50px 0;
+}
+
+div{
+    width: var(--width);
+    margin-bottom: 30px;
+}
+div > p{
+    display: inline-block;
+    margin: 0 30px;
+}
+
+form{
+    width: var(--width);
+    position: relative;
+}
+label{
+    position: relative;
+    top: 8px;
+}
+#inputEmail, #inputPhone{
+    position: relative;
+    top: 2.5px;
+    margin-right: 20px;
+}
+
+#msg{
+    margin-top: 18px;
+    font-size: 14px;
+}
+

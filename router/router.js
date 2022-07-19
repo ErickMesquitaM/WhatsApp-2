@@ -10,6 +10,8 @@ const controllerRooms = require("../controllers/controllerRooms")
 const controllerLogout = require("../controllers/controllerLogout")
 const controllerSign = require("../controllers/login/controllerSign")
 const controllerRecoverAccount = require("../controllers/controllerRecoverAccount")
+const controllerRecoveryAccountValidate = require("../controllers/controllerRecoveryAccountValidate")
+const controllerNewPassword = require("../controllers/controllerNewPassword")
 
 
 
@@ -24,8 +26,16 @@ router.get("/logout", express.json(), controllerLogout )
 router.get("/my-account", express.json(), controllerMyAccount.myAccount)
 router.post("/my-account",  upload.single('inputImg'), controllerMyAccount.updateAccount)
 
+router.get("/recover-account", express.json(), controllerRecoverAccount.view)
+router.post("/recover-account", express.urlencoded({extended: true}), controllerRecoverAccount.recovery)
+
+router.get("/recover-account-code/new-password", express.urlencoded({extended: true}), controllerNewPassword.view)
+router.post("/recover-account-code/new-password", express.urlencoded({extended: true}), controllerNewPassword.updatePwd)
+
+router.post("/recover-account-code", express.urlencoded({extended: true}), controllerRecoveryAccountValidate)
+
 router.get("/rooms", express.json(), controllerRooms)
-router.get("/recover-account", express.json(), controllerRecoverAccount)
+
 router.get("/", express.json(), controllerInitial)
 
 module.exports = router
