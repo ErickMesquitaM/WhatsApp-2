@@ -74,4 +74,20 @@ function validate(){
 
 function resetBorder(input){
     document.getElementById(input).style.borderColor = "#ced4da"
+
+    try{
+        document.getElementById("msnError").style.display = "none"
+        document.getElementById("iconError").style.display = "none"
+    } catch{}
+}
+
+
+function showMsnEmail(){
+    let elem = document.getElementById("msnError")
+       
+    if(elem.style.display == "block"){
+        elem.style.display = "none"    
+    } else {    
+        elem.style.display = "block"           
+    }
 }

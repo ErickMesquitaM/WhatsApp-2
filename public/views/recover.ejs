@@ -20,12 +20,12 @@
 
         <p>Recuperar com:</p>
 
-        <label for="inputEmail"><span class="material-icons">email</span></label>
-        <input type="radio" name="inputRadio" id="inputEmail" checked>
-        
-        <label for="inputPhone"><span class="material-icons">phone</span></label>
-        <input type="radio" name="inputRadio" id="inputPhone">
 
+            <label for="inputEmail"><span class="material-icons">email</span></label>
+            <input type="radio" name="inputRadio" id="inputEmail" checked>
+    
+            <label for="inputPhone"><span class="material-icons">phone</span></label>
+            <input type="radio" name="inputRadio" id="inputPhone">
 
     </div>
 
@@ -36,12 +36,21 @@
         <input type="email" name="email" id="email" class="form-control" placeholder="Email" onchange="resetBorder('email')">
         <input style="display: none;" type="tel" name="phone" id="phone" class="form-control" onchange="resetBorder('phone')" placeholder="Telefone">
 
+
         <button class="btn btn-primary float-right m-3" type="button" onclick="validate()">Enviar</button>
 
         <p id="msg">Enviaremos um email com o código de acesso</p>
 
+        <% try { %>
+            <% if(model){ %>  
+                <span onclick="showMsnEmail()" id="iconError" class="material-icons"> error </span>
+                <span onclick="showMsnEmail()" id="msnError">Nenhum usuário encontrado</span>
+            <% } %>
+        <% } catch{} %>
+
     </form>
 
     <script src="js/recovery.js"></script>
+
 </body>
 </html>

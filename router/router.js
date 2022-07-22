@@ -29,10 +29,11 @@ router.post("/my-account",  upload.single('inputImg'), controllerMyAccount.updat
 router.get("/recover-account", express.json(), controllerRecoverAccount.view)
 router.post("/recover-account", express.urlencoded({extended: true}), controllerRecoverAccount.recovery)
 
-router.get("/recover-account-code/new-password", express.urlencoded({extended: true}), controllerNewPassword.view)
-router.post("/recover-account-code/new-password", express.urlencoded({extended: true}), controllerNewPassword.updatePwd)
+router.get("/recover-account-code", express.json(), controllerRecoveryAccountValidate.view)
+router.post("/recover-account-code", express.urlencoded({extended: true}), controllerRecoveryAccountValidate.validate)
 
-router.post("/recover-account-code", express.urlencoded({extended: true}), controllerRecoveryAccountValidate)
+router.get("/new-password", express.urlencoded({extended: true}), controllerNewPassword.view)
+router.post("/new-password", express.urlencoded({extended: true}), controllerNewPassword.updatePwd)
 
 router.get("/rooms", express.json(), controllerRooms)
 

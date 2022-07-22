@@ -1,14 +1,23 @@
-const jwt = require("jsonwebtoken")
 
-const User = require("../models/user")
-const codeUser = require("./controllerRecoverAccount")
+const recover = require("./controllerRecoverAccount")
 
-module.exports = async (req, res) => {
+module.exports = {
+    
+    validate: async (req, res) => {
 
-    if( codeUser.code != req.body.code){
-        res.redirect("/recover-account-code/new-password")
-    } else {
-        res.redirect("/recover-account-code")
+        if(recover.code != req.body.code){
+            recover.code = ''
+            res.redirect("/new-password")
+        } else {
+            res.redirect("/recover-account-code")
+        }
+    },
+
+    view: (req, res) => {
+        if(recover.user == '' || !recover.user) {
+            res.send("Access Denied")
+        }
+        res.render("recoverInnerCode")
     }
 }
 

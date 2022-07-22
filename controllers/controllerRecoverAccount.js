@@ -20,31 +20,31 @@ module.exports = {
         if(req.body.email){
 
             var selectedUser = await User.findOne({email: req.body.email})
-            if(!selectedUser) return res.status(400).render("recover", {model: "email", req: req.body.email})
+            if(!selectedUser) return res.status(400).render("recover", {model: "email"})
 
             email = selectedUser.email
         } else {
 
             var selectedUser = await User.findOne({phone: req.body.phone})
-            if(!selectedUser) return res.status(400).render("recover", {model: "telefone", req: req.body.phone})
+            if(!selectedUser) return res.status(400).render("recover", {model: "phone" })
 
             email = selectedUser.email
         }
 
         let code =  Math.floor( Math.random() * 9999 ).toString()
 
-        // transport.sendMail({
-        //     from: "WhatsApp 2<erickmesquita319@gmail.com>",
-        //     to: email,
-        //     subject: "código de acesso: " + code,
-        //     html: '',
-        //     text: ""
-        // })
+        transport.sendMail({
+            from: "WhatsApp 2<erickmesquita319@gmail.com>",
+            to: email,
+            subject: "código de acesso: " + code,
+            html: '',
+            text: ""
+        })
 
-        module.exports.code = code, selectedUser
+        module.exports.code = code
         module.exports.user = selectedUser
         
-        res.render("recoverInnerCode")
+        res.redirect("/recover-account-code")
     },
 
     view: (req, res) => {

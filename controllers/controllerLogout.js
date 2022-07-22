@@ -23,7 +23,9 @@ module.exports = async (req, res) => {
         const user = await User.find({ _id: userVerified._id })
     
         jwt.sign( {_id: user[0]._id}, process.env.token_secret, { expiresIn: 1 });
-    } catch {}
+    } catch {
+        res.send("Access Denied")
+    }
 
     await res.header("user-token", '')
     controllerSign.token = ''

@@ -18,7 +18,7 @@
     <form action="/recover-account-code" method="post" id="form">
 
         <label for="code">código:</label>
-        <input class="form-control" type="text" name="code" id="code" onchange="resetBorder()" required>
+        <input class="form-control" type="text" name="code" id="code" onchange="resetBorder()" required autocomplete="off">
 
         <button onclick="validate()" type="button" class="btn btn-primary float-right">Enviar</button>
 

@@ -42,3 +42,25 @@ label{
     font-size: 14px;
 }
 
+#iconError{
+    color: red;
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    cursor: pointer;
+}
+
+#msnError{
+    font-size: 14px;
+    padding: 3px 5px;
+    background-color: rgb(235, 154, 154);
+    border-radius: 3px 3px 0 3px;
+    
+    position: absolute;
+    top: -20px;
+    right: 25px;
+
+    display: none;
+    cursor: pointer;
+}
+
