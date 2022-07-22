@@ -11,6 +11,17 @@ const transport = nodemailer.createTransport({
     }
 })
 
+function geratorCode(){
+
+    let code = Math.floor( Math.random() * 9999 ).toString()
+
+    if(code.slice(3) == 0){
+        geratorCode()
+    } else {
+        return code
+    }
+}
+
 module.exports = {
 
     recovery: async (req, res) => {
@@ -31,7 +42,7 @@ module.exports = {
             email = selectedUser.email
         }
 
-        let code =  Math.floor( Math.random() * 9999 ).toString()
+        let code = geratorCode()
 
         transport.sendMail({
             from: "WhatsApp 2<erickmesquita319@gmail.com>",

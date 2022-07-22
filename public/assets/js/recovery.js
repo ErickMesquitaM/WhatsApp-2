@@ -12,12 +12,6 @@ inputPhone.addEventListener("change", () => {
     changeModel("phone", "email")
 })
 
-function verifyInput(){
-    if(inputPhone.checked){
-        changeModel("phone", "email")
-    }
-} 
-
 function changeModel(input, prevInput){
 
     let modelSelected = document.getElementById(input)

@@ -5,7 +5,7 @@ module.exports = {
     
     validate: async (req, res) => {
 
-        if(recover.code != req.body.code){
+        if(recover.code == req.body.code){
             recover.code = ''
             res.redirect("/new-password")
         } else {
