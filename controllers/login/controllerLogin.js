@@ -25,7 +25,7 @@ const userControlls = {
                 
         const token = jwt.sign({ _id: selectedUser._id }, process.env.token_secret, {expiresIn: "7d"})
 
-        await res.header("user-token", token)
+        await res.header("user_token", token)
         module.exports.token = token
 
         await res.redirect("/my-account")

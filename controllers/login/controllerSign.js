@@ -36,7 +36,7 @@ const userController = {
             const newUser = await User.findOne({email: req.body.email})
             const token = jwt.sign({ _id: newUser._id }, process.env.token_secret, {expiresIn: "7d"})
           
-            await res.header("user-token", token)
+            await res.header("user_token", token)
             module.exports.token = token
 
             res.redirect("/my-account")

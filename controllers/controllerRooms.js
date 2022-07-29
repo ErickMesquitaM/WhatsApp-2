@@ -1,4 +1,7 @@
 
 module.exports = (req, res) => {
-    res.render("rooms")
+
+    let token = req.header("userToken")
+
+    res.send( token )
 }

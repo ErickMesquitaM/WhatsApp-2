@@ -7,11 +7,11 @@ const controllerMyAccount = require("../controllers/controllerConfig")
 const controllerInitial = require("../controllers/controllerInitial")
 const controllerLogin = require("../controllers/login/controllerLogin")
 const controllerRooms = require("../controllers/controllerRooms")
-const controllerLogout = require("../controllers/controllerLogout")
+const controllerLogout = require("../controllers/login/controllerLogout")
 const controllerSign = require("../controllers/login/controllerSign")
-const controllerRecoverAccount = require("../controllers/controllerRecoverAccount")
-const controllerRecoveryAccountValidate = require("../controllers/controllerRecoveryAccountValidate")
-const controllerNewPassword = require("../controllers/controllerNewPassword")
+const controllerRecoverAccount = require("../controllers/login/controllerRecoverAccount")
+const controllerRecoveryAccountValidate = require("../controllers/login/controllerRecoveryAccountValidate")
+const controllerNewPassword = require("../controllers/login/controllerNewPassword")
 
 
 

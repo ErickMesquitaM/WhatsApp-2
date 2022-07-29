@@ -17,17 +17,18 @@ module.exports = {
         
     myAccount: async (req, res) => {
 
-        var token = null
+        var token
 
-        if( req.header("user-token") ){
+        if( req.header("user_token") ){
             console.log("pegou o token do header")
-            token = req.header("user-token")
+            token = req.header("user_token")
+
         } else if( !controllerSign.token ){
             token = controllerLogin.token
         } else {
             token = controllerSign.token
         }
-        await res.header("user-token", token)
+        await res.header("user_token", token)
 
         
         if (!token) return res.status(401).send("Access Denied")
@@ -52,16 +53,16 @@ module.exports = {
 
     updateAccount: async (req, res) => {
 
-        var token = null
+        var token
 
-        if( req.header("user-token") ){
-            token = req.header("user-token")
+        if( req.header("user_token") ){
+            token = req.header("user_token")
         } else if( !controllerSign.token ){
             token = controllerLogin.token
         } else {
             token = controllerSign.token
         }
-        await res.header("user-token", token)
+        await res.header("user_token", token)
 
         const userVerified = jwt.verify(token, process.env.token_secret)
         const user = await User.find({ _id: userVerified._id })
