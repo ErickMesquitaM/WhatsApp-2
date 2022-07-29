@@ -35,7 +35,7 @@ router.post("/recover-account-code", express.urlencoded({extended: true}), contr
 router.get("/new-password", express.urlencoded({extended: true}), controllerNewPassword.view)
 router.post("/new-password", express.urlencoded({extended: true}), controllerNewPassword.updatePwd)
 
-router.get("/rooms", express.json(), controllerRooms)
+router.get("/rooms", express.json(), controllerRooms.view)
 
 router.get("/", express.json(), controllerInitial)
 
