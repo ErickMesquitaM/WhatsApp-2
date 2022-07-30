@@ -1,0 +1,25 @@
+#screnn{
+    width: 500px;
+    margin: auto;
+}
+
+header{
+    background-color: rgb(64, 64, 82);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 0;
+}
+img{
+    width: 45px;
+    height: 45px;
+    margin: 0 10px;
+    border-radius: 50%;
+    background-color: white;
+    border: none;
+}
+span{
+    font-weight: bolder;
+    color: white;
+    margin: 0 20px;
+}
