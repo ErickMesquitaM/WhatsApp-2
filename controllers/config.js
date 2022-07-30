@@ -5,8 +5,8 @@ const path = require("path")
 const User = require("../models/user")
 const Image = require('../models/image')
 
-const controllerLogin = require("./login/controllerLogin")
-const controllerSign = require("./login/controllerSign")
+const controllerLogin = require("./login/login")
+const controllerSign = require("./login/sign")
 const validate = require("./login/validate")
 
 

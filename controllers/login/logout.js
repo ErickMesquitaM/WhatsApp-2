@@ -1,8 +1,8 @@
 
 const jwt = require("jsonwebtoken")
 
-const controllerLogin = require("./controllerLogin")
-const controllerSign = require("./controllerSign")
+const controllerLogin = require("./login")
+const controllerSign = require("./sign")
 
 const User = require("../../models/user")
 

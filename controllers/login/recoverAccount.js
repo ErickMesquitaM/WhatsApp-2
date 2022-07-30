@@ -16,7 +16,7 @@ function geratorCode(){
     let code = Math.floor( Math.random() * 9999 ).toString()
 
     if(code.slice(3) == 0){
-        geratorCode()
+        return geratorCode()
     } else {
         return code
     }

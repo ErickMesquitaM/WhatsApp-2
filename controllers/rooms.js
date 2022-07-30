@@ -6,8 +6,8 @@ const DbMsg = require("../models/dbMsg")
 const Img = require("../models/image")
 
 
-const controllerLogin = require("./login/controllerLogin")
-const controllerSign = require("./login/controllerSign")
+const controllerLogin = require("./login/login")
+const controllerSign = require("./login/sign")
 const validate = require("./login/validate")
 
 

@@ -1,0 +1,15 @@
+
+form{
+    margin: auto;
+    width: 400px;
+
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+}
+
+#img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}

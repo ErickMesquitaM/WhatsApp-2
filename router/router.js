@@ -3,40 +3,46 @@ const router = express.Router()
 const multer = require('multer')
 const upload = multer({ dest: 'uploads/' })
 
-const controllerMyAccount = require("../controllers/controllerConfig")
-const controllerInitial = require("../controllers/controllerInitial")
-const controllerLogin = require("../controllers/login/controllerLogin")
-const controllerRooms = require("../controllers/controllerRooms")
-const controllerLogout = require("../controllers/login/controllerLogout")
-const controllerSign = require("../controllers/login/controllerSign")
-const controllerRecoverAccount = require("../controllers/login/controllerRecoverAccount")
-const controllerRecoveryAccountValidate = require("../controllers/login/controllerRecoveryAccountValidate")
-const controllerNewPassword = require("../controllers/login/controllerNewPassword")
+const myAccount = require("../controllers/config")
+const initial = require("../controllers/initial")
+const login = require("../controllers/login/login")
+const rooms = require("../controllers/rooms")
+const logout = require("../controllers/login/logout")
+const sign = require("../controllers/login/sign")
+const recoverAccount = require("../controllers/login/recoverAccount")
+const recoveryAccountValidate = require("../controllers/login/recoveryAccountValidate")
+const newPassword = require("../controllers/login/newPassword")
+const newRoom = require("../controllers/newRoom.js")
 
 
 
-router.get("/login", express.json(), controllerLogin.view)
-router.post("/login", express.urlencoded({extended: true}), controllerLogin.login)
+router.get("/login", express.json(), login.view)
+router.post("/login", express.urlencoded({extended: true}), login.login)
 
-router.get("/sign", express.json(), controllerSign.router)
-router.post("/sign", express.urlencoded({extended: true}), controllerSign.sign)
+router.get("/sign", express.json(), sign.router)
+router.post("/sign", express.urlencoded({extended: true}), sign.sign)
 
-router.get("/logout", express.json(), controllerLogout )
+router.get("/logout", express.json(), logout )
 
-router.get("/my-account", express.json(), controllerMyAccount.myAccount)
-router.post("/my-account",  upload.single('inputImg'), controllerMyAccount.updateAccount)
+router.get("/my-account", express.json(), myAccount.myAccount)
+router.post("/my-account",  upload.single('inputImg'), myAccount.updateAccount)
 
-router.get("/recover-account", express.json(), controllerRecoverAccount.view)
-router.post("/recover-account", express.urlencoded({extended: true}), controllerRecoverAccount.recovery)
+router.get("/recover-account", express.json(), recoverAccount.view)
+router.post("/recover-account", express.urlencoded({extended: true}), recoverAccount.recovery)
 
-router.get("/recover-account-code", express.json(), controllerRecoveryAccountValidate.view)
-router.post("/recover-account-code", express.urlencoded({extended: true}), controllerRecoveryAccountValidate.validate)
+router.get("/recover-account-code", express.json(), recoveryAccountValidate.view)
+router.post("/recover-account-code", express.urlencoded({extended: true}), recoveryAccountValidate.validate)
 
-router.get("/new-password", express.urlencoded({extended: true}), controllerNewPassword.view)
-router.post("/new-password", express.urlencoded({extended: true}), controllerNewPassword.updatePwd)
+router.get("/new-password", express.urlencoded({extended: true}), newPassword.view)
+router.post("/new-password", express.urlencoded({extended: true}), newPassword.updatePwd)
 
-router.get("/rooms", express.json(), controllerRooms.view)
 
-router.get("/", express.json(), controllerInitial)
+// router.get("/rooms:?", express.json(), controllerRoom)
+router.get("/rooms", express.json(), rooms.view)
+
+router.get("/new-room", express.json(), newRoom.view)
+
+
+router.get("/", express.json(), initial)
 
 module.exports = router

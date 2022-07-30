@@ -1,6 +1,6 @@
 
-const controllerLogin = require("./login/controllerLogin")
-const controllerSign = require("./login/controllerSign")
+const controllerLogin = require("./login/login")
+const controllerSign = require("./login/sign")
 
 module.exports = async (req, res) => {
 

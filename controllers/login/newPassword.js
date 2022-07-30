@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs")
 
 const User = require("../../models/user")
-const recover = require("./controllerRecoverAccount")
+const recover = require("./recoverAccount")
 
 const newPassword = {
 

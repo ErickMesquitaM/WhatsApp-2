@@ -1,5 +1,5 @@
 
-const recover = require("./controllerRecoverAccount")
+const recover = require("./recoverAccount")
 
 module.exports = {
     
