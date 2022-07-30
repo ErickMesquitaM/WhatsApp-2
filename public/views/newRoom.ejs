@@ -13,11 +13,11 @@
 </head>
 <body>
 
-    <form action="/new-room" method="post" id="form">
+    <form action="/new-room" method="post" id="form" enctype="multipart/form-data">
 
         <img src="img/white.png" id="img" class="m-auto" onclick="clickLabel()">
         
-        <input class="d-none" type="file" name="inputImg" id="inputImg">
+        <input class="d-none" type="file" name="inputImage" id="inputImage">
 
         <input class="form-control mt-4" type="text" name="name" id="name" placeholder="Nome" onchange="resetBorder('name')" autocomplete="off">
 

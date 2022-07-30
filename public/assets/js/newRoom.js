@@ -1,5 +1,5 @@
 
-const inputImg = document.getElementById("inputImg")
+const inputImg = document.getElementById("inputImage")
 const img = document.getElementById("img")
 const boardPWd = document.getElementById("boardPwd")
 var inpupCheckBox = document.getElementById("inputPwd")

@@ -12,7 +12,7 @@ const sign = require("../controllers/login/sign")
 const recoverAccount = require("../controllers/login/recoverAccount")
 const recoveryAccountValidate = require("../controllers/login/recoveryAccountValidate")
 const newPassword = require("../controllers/login/newPassword")
-const newRoom = require("../controllers/newRoom.js")
+const newRoom = require("../controllers/newRoom")
 
 
 
@@ -34,14 +34,14 @@ router.get("/recover-account-code", express.json(), recoveryAccountValidate.view
 router.post("/recover-account-code", express.urlencoded({extended: true}), recoveryAccountValidate.validate)
 
 router.get("/new-password", express.json(), newPassword.view)
-router.post("/new-password",  upload.single('inputImg'), newPassword.updatePwd)
+router.post("/new-password",  express.urlencoded({extended: true}), newPassword.updatePwd)
 
 
 // router.get("/rooms:?", express.json(), controllerRoom)
 router.get("/rooms", express.json(), rooms.view)
 
 router.get("/new-room", express.json(), newRoom.view)
-router.post("/new-room", express.urlencoded({extended: true}), newRoom.new)
+router.post("/new-room", upload.single('inputImage'), newRoom.new)
 
 
 router.get("/", express.json(), initial)

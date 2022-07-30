@@ -1,4 +1,7 @@
 const jwt = require("jsonwebtoken")
+const bcrypt = require("bcryptjs")
+const fs = require("fs")
+const path = require("path")
 
 const User = require("../models/user")
 const Img = require("../models/image")
@@ -40,53 +43,46 @@ module.exports = {
             requirePwd = true
         }
 
+        var imgName
+
+        if(req.file){
+            imgName = req.file.filename
+
+            var obj = {
+                uid: imgName,
+                img: {
+                    data: fs.readFileSync(path.join(__dirname + '/../uploads/' + req.file.filename)),
+                    contentType: 'image/png'
+                }
+            }
+            Img.create(obj, async (err, item) => {
+                if(!err) {
+                    await item.save()
+                    fs.unlink("uploads/" + req.file.filename, (err) => { console.log(err) })
+                
+                } else {
+                    res.send(err)
+                }
+            })
+
+        } else {
+            imgName = "image-default-room"
+        }
+
+
         const room = new Room({
             name: req.body.name,
             users:  [user[0]._id],
-            img: '',
+            img: imgName,
             required_pwd: requirePwd,
-            password: req.body.pwd,
+            password: bcrypt.hashSync(req.body.pwd),
             db_msg_id: req.body.name + idDB,
         })
             
         await room.save()
 
+
         res.send(room)
-
-        // var imgName
-
-        // if(req.file){
-
-        //     let id = uid()
-
-        //     if( user[0].image != "image-default" ){
-        //         await Image.deleteOne({ uid: user[0].image });
-        //     }
-
-        //     var obj = {
-        //         uid: id,
-        //         img: {
-        //             data: fs.readFileSync(path.join(__dirname + '/../uploads/' + req.file.filename)),
-        //             contentType: 'image/png'
-        //         }
-        //     }
-        //     Image.create(obj, async (err, item) => {
-        //         if(!err) {
-        //             await item.save()
-        //             await User.updateMany({_id: user[0]._id}, { $set: { image: id } });
-
-        //             fs.unlink("uploads/" + req.file.filename, (err) => { console.log(err) })
-
-        //             updateFinily()
-        //         } else {
-        //             res.send(err)
-        //         }
-        //     })
-
-        // }
-    
-
-
     },
 
     view: (req, res) => {
