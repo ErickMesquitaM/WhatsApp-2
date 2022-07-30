@@ -6,7 +6,7 @@ const userSchema = mongoose.Schema({
     users:  Array,
     img: String,
     required_pwd: {type: Boolean, required: true},
-    password: {type: String, required: false, minlength: 3, maxlength: 200},
+    password: String,
     db_msg_id: String,
 
     createdAt: {type: Date, default: Date.now},

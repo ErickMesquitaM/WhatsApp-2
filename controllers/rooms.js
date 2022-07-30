@@ -54,18 +54,3 @@ module.exports = {
     }
 
 }
-
-
-
-
-    // CREATE ROOM
-
-// const room = new Room({
-//     name: "name",
-//     users:  [user[0]._id],
-//     img: "image-default",
-//     required_pwd: false,
-//     db_msg_id: "databese msg",
-// })
-    
-// await room.save()

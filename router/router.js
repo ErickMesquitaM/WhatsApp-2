@@ -33,14 +33,15 @@ router.post("/recover-account", express.urlencoded({extended: true}), recoverAcc
 router.get("/recover-account-code", express.json(), recoveryAccountValidate.view)
 router.post("/recover-account-code", express.urlencoded({extended: true}), recoveryAccountValidate.validate)
 
-router.get("/new-password", express.urlencoded({extended: true}), newPassword.view)
-router.post("/new-password", express.urlencoded({extended: true}), newPassword.updatePwd)
+router.get("/new-password", express.json(), newPassword.view)
+router.post("/new-password",  upload.single('inputImg'), newPassword.updatePwd)
 
 
 // router.get("/rooms:?", express.json(), controllerRoom)
 router.get("/rooms", express.json(), rooms.view)
 
 router.get("/new-room", express.json(), newRoom.view)
+router.post("/new-room", express.urlencoded({extended: true}), newRoom.new)
 
 
 router.get("/", express.json(), initial)

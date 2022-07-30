@@ -1,3 +1,6 @@
+body{
+    height: 100vh;
+}
 
 form{
     margin: auto;
@@ -6,10 +9,24 @@ form{
     display: flex;
     flex-direction: column;
     justify-items: center;
+
+    position: relative;
+    top: 40%;
+    transform: translateY(-50%);
 }
 
 #img{
     width: 150px;
     height: 150px;
     border-radius: 50%;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: .2s;
+}
+#img:hover{
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.hidden{
+    visibility: hidden;
 }
