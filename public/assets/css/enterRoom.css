@@ -4,10 +4,22 @@ form{
     width: 400px;
     margin: auto;
     text-align: center;
+    position: relative;
 }
 
 img{
     width: 180px;
     height: 180px;
     border-radius: 50%;
+}
+
+#pwd{
+    width: calc(100% - 100px);
+    display: inline-block;
+}
+#iconError{
+    color: red;
+    position: absolute;
+    bottom: 5px;
+    right: 90px;
 }

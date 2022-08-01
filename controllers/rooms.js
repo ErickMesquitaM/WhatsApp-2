@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken")
+const bcrypt = require("bcryptjs")
 
 const User = require("../models/user")
 const Room = require("../models/rooms")
@@ -8,7 +9,11 @@ const Img = require("../models/image")
 
 const controllerLogin = require("./login/login")
 const controllerSign = require("./login/sign")
+const rooms = require("../models/rooms")
 
+var room
+var user
+let image
 
 module.exports = {
 
@@ -37,7 +42,7 @@ module.exports = {
         if (!token) return res.status(401).send("Access Denied")
 
         const userVerified = jwt.verify(token, process.env.token_secret)
-        const user = await User.find({ _id: userVerified._id })
+        user = await User.find({ _id: userVerified._id })
 
         const rooms = await Room.find({ users: user[0]._id })
 
@@ -69,19 +74,20 @@ module.exports = {
         await res.header("user_token", token)
 
 
-        const room = await Room.findOne({_id: req.params.id_room})
+        room = await Room.findOne({_id: req.params.id_room})
         if( !room ) return res.status(404).send("Page Not Found")
 
         try{
 
             const userVerified = jwt.verify(token, process.env.token_secret)
-            var user = await User.findOne({ _id: userVerified._id })
+            user = await User.findOne({ _id: userVerified._id })
+
         } catch{ user = {_id: ''}}
 
         const statusUser = await Room.findOne({_id: req.params.id_room, users: user._id})
         
         if( !statusUser ) {
-            let image = await Img.findOne({uid: room.img})
+            image = await Img.findOne({uid: room.img})
 
             if(image){
                 return res.render("enterRoom", {room, img: image.img})
@@ -90,7 +96,34 @@ module.exports = {
             }
             
         }
-        res.send(statusUser) // /62e578703d169fad4efef5ed
+        res.send(statusUser) // /62e7d9fec6798f62b478146d       erick   sem senha
+                             // /62e7da1fc6798f62b4781479       aaa     com senha
+    },
+
+    enter: async (req, res) => {
+
+        let pwd
+
+        if(!req.body.pwd){
+            pwd = ''
+        } else {
+            pwd = req.body.pwd
+        }
+
+        const match = bcrypt.compareSync(pwd, room.password)
         
+        if(match){
+            await Room.updateOne({_id: room._id}, { $addToSet: { users: user._id } })
+        } else {
+            res.redirect("/rooms/" + room._id)
+
+        //    res.render("enterRoom", {room, img: image.img, err: "err"})
+        }
+
+        res.send(room)
+
     }
+
+
+
 }
