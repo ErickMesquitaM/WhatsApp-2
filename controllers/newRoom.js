@@ -82,7 +82,7 @@ module.exports = {
         await room.save()
 
 
-        res.redirect("local da sala")   //////////////////////////////////////////////
+        res.redirect("/rooms")   //////////////////////////////////////////////
     },
 
     view: (req, res) => {

@@ -1,25 +1,73 @@
 #screnn{
-    width: 500px;
+    width: 450px;
     margin: auto;
 }
 
 header{
     background-color: rgb(64, 64, 82);
-    display: flex;
+    display: grid;
+    grid-template: 1fr / .1fr 1fr .1fr;
     align-items: center;
-    justify-content: space-between;
-    padding: 7px 0;
+    justify-content: end;
+    padding: 10px 0;
 }
 img{
-    width: 45px;
-    height: 45px;
-    margin: 0 10px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
-    background-color: white;
     border: none;
+}
+h2{
+    color: white;
+    text-align: end;
+    overflow: hidden;
 }
 span{
     font-weight: bolder;
     color: white;
-    margin: 0 20px;
+    cursor: pointer;
+}
+
+section{
+    background-color: rgb(187, 204, 241);
+    height: 100vh;
+}
+ul{
+    padding: 20px 10px;
+    height: calc(100% - 125px);
+    margin: 0;
+}
+
+li{
+    list-style: none;
+    text-align: start;
+    color: rgb(39, 39, 39);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    margin-bottom: 5px;
+}
+li > div{
+    display: inline-block;
+    max-width: 300px;
+    padding: 7px 20px 10px 10px;
+    border-radius: 10px 10px 10px 0;
+    background-color: rgb(126, 128, 255);
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+.msgUser{
+    text-align: end;
+}
+.msgUser > div{
+    padding: 7px 10px 10px 20px;
+    border-radius: 10px 10px 0 10px;
+    background-color: rgb(128, 255, 202);
+}
+h5, p{
+    margin: 0;
+    padding: 0;
+    cursor: default;
+}
+
+#txt{
+    width: calc(100% - 93px);
+    display: inline-block;
 }

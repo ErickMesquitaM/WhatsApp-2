@@ -9,7 +9,7 @@
     <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/enterRoom.css">
+    <link rel="stylesheet" href="../css/room.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 </head>
@@ -20,18 +20,72 @@
 
         <header>
 
-            <span onclick="back()" id="iconBack" class="material-icons"> arrow_back_ios </span>
-            <img src="" alt="">
+            <span onclick="back()" id="iconBack" class="material-icons mr-3 ml-3"> arrow_back_ios </span>
+            <h2> <%= room.name %> </h2>
+            <img src="data:image/<%=img.contentType%>;base64, <%=img.data.toString('base64')%>" alt="" class="mr-3 ml-3">
 
         </header>
 
+        <ul>
+<!-- fazer a verificação se a mensagem for do usuario logado ela recebe uma classe diferente -->
 
+            <li class="msgUser">
+                <div>
+                    <h5>GreckMM</h5>
+                    <p>Olá Alan Harper, tudo joia?</p>
+                </div>
+            </li>
+
+            <li>
+                <div>
+                    <h5>Alan Harper</h5>
+                    <p>Wtf bro, do you bastard?</p>
+                </div>
+            </li>
+
+            <li class="msgUser">
+                <div>
+                    <h5>GreckMM</h5>
+                    <p>Oooh,sorry bro</p>
+                </div>
+            </li>
+
+            <li>
+                <div>
+                    <h5>Alan Harper</h5>
+                    <p>Deus bençoe</p>
+                </div>
+            </li>
+
+            <li>
+                <div>
+                    <h5>Alan Harper</h5>
+                    <p>Do you have money?</p>
+                </div>
+            </li>
+            <li class="msgUser">
+                <div>
+                    <h5>GreckMM</h5>
+                    <p>i no have</p>
+                </div>
+            </li>
+
+        </ul>
+
+        <form action="" id="msg" class="pt-2 pb-2">
+
+            <input class="form-control ml-2" type="text" id="txt" placeholder="Digite sua menssagem">
+
+            <button type="button" class="btn btn-secondary ml-2 mr-2 float-right">Enviar</button>
+
+
+        </div>
 
     </section>
 
 
 
 
-    <!-- <script src="../js/enterRoom.js"></script> -->
+    <script src="../js/room.js"></script>
 </body>
 </html>

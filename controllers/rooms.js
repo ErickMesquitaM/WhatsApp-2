@@ -55,25 +55,29 @@ module.exports = {
 
     redirectRoom: async (req, res) => {
 
-        const room = await Room.findOne({ _id: req.params.id_room})
-        const img = await Img.findOne({ uid: room.img })
+        var room
+
+        try{
+            room = await Room.findOne({ _id: req.params.id_room})
+            var img = await Img.findOne({ uid: room.img })
+        } catch {}
+
 
         if(room){
 
-            const userFind = await Room.findOne({ _id: room._id, users: user._id })
+            try {
+                var userFind = await Room.findOne({ _id: room._id, users: user._id })
+            } catch{}
 
             if(userFind){
-                // res.render("room", {room, img})   renderizar a sala
-                res.send(userFind)
+                
+                res.render("room", {room, img: img.img})
+            
             } else {
                 res.redirect("/rooms/" + req.params.id_room + "/enter")
             }
         } else {
-            res.status(404).send("Access Denied")
+            res.status(404).send("Room Not Found")
         }
-
-
-    
     }
 }
-

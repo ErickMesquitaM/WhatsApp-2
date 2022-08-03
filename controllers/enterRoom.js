@@ -58,9 +58,9 @@ module.exports = {
         
         if(match){
             await Room.updateOne({_id: room._id}, { $addToSet: { users: user._id } })
-            res.send(room)
+            res.redirect("/rooms")
         } else {
-            res.send("Senha errada")
+            res.render("enterRoom", {room, img: image.img} )
 
         //    res.render("enterRoom", {room, img: image.img, err: "err"})
         }
