@@ -5,6 +5,7 @@ const mongoose = require("mongoose")
 const path = require("path")
 
 const routers = require("./router/router")
+const socket = require("socket.io")
 
 const app = express()
 
@@ -21,9 +22,17 @@ mongoose.connect(process.env.MONGODB_PATH,
     (error) => { if(error) throw error; console.log("Mongo Funcionando")
 })
 
-
 app.use("/", express.json(), routers)
 
-app.listen(process.env.PORT, () => {
+const server = app.listen(process.env.PORT, () => {
     console.log("Server Servindo")
 })
+
+const io = socket(server)
+
+io.on('connection', (socket) => {
+
+    socket.on('message', (msg) => {
+        io.emit('message', msg);
+    });
+});

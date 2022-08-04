@@ -10,11 +10,19 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="css/rooms.css">
     <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 </head>
 <body>
 
-    <img src="img/logo.png" alt="" class="logo">
-    
+    <article>
+
+        <span onclick="back()" id="iconBack" class="material-icons"> arrow_back_ios </span>
+
+        <a href="/new-room" class="btn btn-primary">Criar Sala</a>
+
+    </article>
+
     <ul>
 
         <% if(rooms.length == 0){ %>
@@ -38,12 +46,6 @@
         <% } %>
     </ul>
 
-
-    <article>
-
-        <a href="/new-room" class="btn btn-primary">Criar Sala</a>
-
-    </article>
 
     <script src="js/rooms.js"></script>
 </body>

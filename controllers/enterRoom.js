@@ -29,9 +29,11 @@ module.exports = {
         }
         await res.header("user_token", token)
 
-        const userVerified = jwt.verify(token, process.env.token_secret)
-        user = await User.findOne({ _id: userVerified._id })
-
+        try {
+            const userVerified = jwt.verify(token, process.env.token_secret)
+            user = await User.findOne({ _id: userVerified._id })
+        } catch {}
+        
         if(!user) return res.redirect("/login")
 
         const room = await Room.findOne({_id: req.params.id_room})

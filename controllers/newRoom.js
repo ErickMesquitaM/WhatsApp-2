@@ -82,7 +82,7 @@ module.exports = {
         await room.save()
 
 
-        res.redirect("/rooms")   //////////////////////////////////////////////
+        res.redirect("/rooms/" + room._id)
     },
 
     view: (req, res) => {

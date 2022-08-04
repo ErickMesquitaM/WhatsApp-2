@@ -34,8 +34,10 @@ section{
 }
 ul{
     padding: 20px 10px;
-    height: calc(100% - 125px);
+    padding-right: 20px;
+    height: calc(100% - 124px);
     margin: 0;
+    overflow-y: scroll;
 }
 
 li{
@@ -70,4 +72,8 @@ h5, p{
 #txt{
     width: calc(100% - 93px);
     display: inline-block;
+}
+
+form{
+    background-color: rgb(64, 64, 82);
 }
