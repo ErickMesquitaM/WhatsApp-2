@@ -4,16 +4,8 @@ const controllerSign = require("./login/sign")
 
 module.exports = async (req, res) => {
 
-    let token = null
+    let token = await req.header("authorization-token")
 
-    if( req.header("user_token") ){
-        token = req.header("user_token")
-    } else if( !controllerSign.token ){
-        token = controllerLogin.token
-    } else {
-        token = controllerSign.token
-    }
-    await res.header("user_token", token)
     
     if(token){
         res.redirect("/my-account")

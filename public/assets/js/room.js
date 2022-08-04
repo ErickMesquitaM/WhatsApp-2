@@ -19,7 +19,6 @@ function sendMsg(){
     
     if (msg.length > 0){
 
-        console.log(msg + ": foi oq ela disse")
         let user = "ulala"
 
         socket.emit('message', {user, msg });

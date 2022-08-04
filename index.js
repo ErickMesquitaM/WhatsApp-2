@@ -33,6 +33,8 @@ const io = socket(server)
 io.on('connection', (socket) => {
 
     socket.on('message', (msg) => {
+        console.log( msg )
         io.emit('message', msg);
     });
+
 });

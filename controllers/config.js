@@ -17,30 +17,19 @@ module.exports = {
         
     myAccount: async (req, res) => {
 
-        var token
 
-        if( req.header("user_token") ){
-            console.log("pegou o token do header")
-            token = req.header("user_token")
-
-        } else if( !controllerSign.token ){
-            token = controllerLogin.token
-        } else {
-            token = controllerSign.token
-        }
-        await res.header("user_token", token)
-
+        var token = await req.header("authorization-token")
         
         if (!token) return res.status(401).send("Access Denied")
 
         try {
             const userVerified = jwt.verify(token, process.env.token_secret)
-            const user = await User.find({ _id: userVerified._id })
+            const user = await User.findOne({ _id: userVerified._id })
 
-            Image.find({uid: user[0].image}, (err, items) => {
+            Image.findOne({uid: user.image}, (err, items) => {
                 if (!err) {
 
-                    res.render("my-account", {user: user[0], img: items[0].img})
+                    res.render("my-account", {user: user, img: items.img})
                 } else {
                     res.status(500).send('Error: ' + err)
                 }

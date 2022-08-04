@@ -71,7 +71,7 @@ module.exports = {
 
             if(userFind){
                 
-                res.render("room", {room, img: img.img})
+                res.render("room", {room, img: img.img, user: user.user})
             
             } else {
                 res.redirect("/rooms/" + req.params.id_room + "/enter")

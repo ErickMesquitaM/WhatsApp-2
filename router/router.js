@@ -17,37 +17,36 @@ const enterRoom = require("../controllers/enterRoom")
 
 
 
-
-router.get("/login", express.json(), login.view)
+router.get("/login", login.view)
 router.post("/login", express.urlencoded({extended: true}), login.login)
 
-router.get("/sign", express.json(), sign.router)
+router.get("/sign", sign.router)
 router.post("/sign", express.urlencoded({extended: true}), sign.sign)
 
-router.get("/logout", express.json(), logout )
+router.get("/logout", logout )
 
-router.get("/my-account", express.json(), myAccount.myAccount)
+router.get("/my-account", myAccount.myAccount)
 router.post("/my-account",  upload.single('inputImg'), myAccount.updateAccount)
 
-router.get("/recover-account", express.json(), recoverAccount.view)
+router.get("/recover-account", recoverAccount.view)
 router.post("/recover-account", express.urlencoded({extended: true}), recoverAccount.recovery)
 
-router.get("/recover-account-code", express.json(), recoveryAccountValidate.view)
+router.get("/recover-account-code", recoveryAccountValidate.view)
 router.post("/recover-account-code", express.urlencoded({extended: true}), recoveryAccountValidate.validate)
 
-router.get("/new-password", express.json(), newPassword.view)
+router.get("/new-password", newPassword.view)
 router.post("/new-password",  express.urlencoded({extended: true}), newPassword.updatePwd)
 
-router.get("/rooms/:id_room/enter", express.json(), enterRoom.view)
+router.get("/rooms/:id_room/enter", enterRoom.view)
 router.post("/rooms/:id_room/enter", express.urlencoded({extended: true}), enterRoom.enter)
 
-router.get("/rooms/:id_room", express.json(), rooms.redirectRoom)
+router.get("/rooms/:id_room", rooms.redirectRoom)
 router.get("/rooms", express.json(), rooms.view)
 
-router.get("/new-room", express.json(), newRoom.view)
+router.get("/new-room", newRoom.view)
 router.post("/new-room", upload.single('inputImage'), newRoom.new)
 
 
-router.get("/", express.json(), initial)
+router.get("/", initial)
 
 module.exports = router
