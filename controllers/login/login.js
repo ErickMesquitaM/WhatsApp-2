@@ -23,9 +23,9 @@ const userControlls = {
         const passwordAndUserMatch = bcrypt.compareSync(req.body.pwd, selectedUser.password)
         if(!passwordAndUserMatch) return res.status(400).render("login", {data: req.body})
                 
-        const token = jwt.sign({ _id: selectedUser._id }, process.env.token_secret)
+        let token = jwt.sign({ _id: selectedUser._id }, process.env.token_secret)
 
-        res.header("authorization-token", token)
+        res.set({"authorization-token": token})
 
         res.redirect("/my-account")
     },

@@ -5,10 +5,7 @@ const path = require("path")
 const User = require("../models/user")
 const Image = require('../models/image')
 
-const controllerLogin = require("./login/login")
-const controllerSign = require("./login/sign")
 const validate = require("./login/validate")
-
 
 function uid(){ return String( Date.now().toString(32) + Math.random().toString(16)).replace(/\./g, '')}
 
@@ -18,12 +15,9 @@ module.exports = {
     myAccount: async (req, res) => {
 
 
-        var token = await req.header("authorization-token")
-        
-        if (!token) return res.status(401).send("Access Denied")
-
         try {
-            const userVerified = jwt.verify(token, process.env.token_secret)
+
+            const userVerified = jwt.verify(req.user, process.env.token_secret)
             const user = await User.findOne({ _id: userVerified._id })
 
             Image.findOne({uid: user.image}, (err, items) => {
@@ -36,22 +30,11 @@ module.exports = {
             })
 
         } catch (error) {
-            res.status(401).send("Access Denied")
+            res.status(401).send("Access Denied: " + error)
         }
     },
 
     updateAccount: async (req, res) => {
-
-        var token
-
-        if( req.header("user_token") ){
-            token = req.header("user_token")
-        } else if( !controllerSign.token ){
-            token = controllerLogin.token
-        } else {
-            token = controllerSign.token
-        }
-        await res.header("user_token", token)
 
         const userVerified = jwt.verify(token, process.env.token_secret)
         const user = await User.find({ _id: userVerified._id })

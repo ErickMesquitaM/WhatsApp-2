@@ -3,7 +3,7 @@ const router = express.Router()
 const multer = require('multer')
 const upload = multer({ dest: 'uploads/' })
 
-const myAccount = require("../controllers/config")
+const myAccount = require("../controllers/myAccount")
 const initial = require("../controllers/initial")
 const login = require("../controllers/login/login")
 const rooms = require("../controllers/rooms")
@@ -15,6 +15,7 @@ const newPassword = require("../controllers/login/newPassword")
 const newRoom = require("../controllers/newRoom")
 const enterRoom = require("../controllers/enterRoom")
 
+const auth = require("../controllers/login/auth")
 
 
 router.get("/login", login.view)
@@ -23,9 +24,9 @@ router.post("/login", express.urlencoded({extended: true}), login.login)
 router.get("/sign", sign.router)
 router.post("/sign", express.urlencoded({extended: true}), sign.sign)
 
-router.get("/logout", logout )
+router.get("/logout", auth, logout )
 
-router.get("/my-account", myAccount.myAccount)
+router.get("/my-account", auth, myAccount.myAccount)
 router.post("/my-account",  upload.single('inputImg'), myAccount.updateAccount)
 
 router.get("/recover-account", recoverAccount.view)
@@ -37,7 +38,7 @@ router.post("/recover-account-code", express.urlencoded({extended: true}), recov
 router.get("/new-password", newPassword.view)
 router.post("/new-password",  express.urlencoded({extended: true}), newPassword.updatePwd)
 
-router.get("/rooms/:id_room/enter", enterRoom.view)
+router.get("/rooms/:id_room/enter", auth, enterRoom.view)
 router.post("/rooms/:id_room/enter", express.urlencoded({extended: true}), enterRoom.enter)
 
 router.get("/rooms/:id_room", rooms.redirectRoom)
