@@ -17,7 +17,6 @@ const enterRoom = require("../controllers/enterRoom")
 
 const auth = require("../controllers/login/auth")
 
-
 router.get("/login", login.view)
 router.post("/login", express.urlencoded({extended: true}), login.login)
 
@@ -41,10 +40,10 @@ router.post("/new-password",  express.urlencoded({extended: true}), newPassword.
 router.get("/rooms/:id_room/enter", auth, enterRoom.view)
 router.post("/rooms/:id_room/enter", express.urlencoded({extended: true}), enterRoom.enter)
 
-router.get("/rooms/:id_room", rooms.redirectRoom)
-router.get("/rooms", express.json(), rooms.view)
+router.get("/rooms/:id_room", auth, rooms.redirectRoom)
+router.get("/rooms", auth, rooms.view)
 
-router.get("/new-room", newRoom.view)
+router.get("/new-room", auth, newRoom.view)
 router.post("/new-room", upload.single('inputImage'), newRoom.new)
 
 

@@ -25,11 +25,9 @@ const userControlls = {
                 
         let token = jwt.sign({ _id: selectedUser._id }, process.env.token_secret)
 
-        res.set({"authorization-token": token})
-
+        res.cookie('token', token, { httpOnly: false })
         res.redirect("/my-account")
     },
-
     view: (req, res) => {
         res.render("login", {data: datas})
     }

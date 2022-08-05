@@ -4,7 +4,7 @@ const controllerSign = require("./login/sign")
 
 module.exports = async (req, res) => {
 
-    let token = await req.header("authorization-token")
+    let token = req.cookies.token
 
     
     if(token){

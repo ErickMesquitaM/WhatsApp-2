@@ -1,4 +1,3 @@
-const jwt = require("jsonwebtoken")
 const bcrypt = require("bcryptjs")
 const fs = require("fs")
 const path = require("path")
@@ -8,34 +7,20 @@ const Img = require("../models/image")
 const Room = require("../models/rooms")
 const DbMsg = require("../models/dbMsg")
 
-const controllerLogin = require("./login/login")
-const controllerSign = require("./login/sign")
 
 function uid(){ return String( Date.now().toString(32) + Math.random().toString(16)).replace(/\./g, '')}
+var user
 
 module.exports = {
+    
+    view: (req, res) => {
+        user = req.user
+        res.render("newRoom")
+    },
 
     new: async (req, res) => {
 
-        var token
-
-        if( req.header("user_token") ){
-            console.log("pegou o token do header")
-            token = req.header("user_token")
-
-        } else if( !controllerSign.token ){
-            token = controllerLogin.token
-        } else {
-            token = controllerSign.token
-        }
-        await res.header("user_token", token)
-
-
-        if (!token) return res.status(401).send("Access Denied")
-
-        const userVerified = jwt.verify(token, process.env.token_secret)
-        const user = await User.find({ _id: userVerified._id })
-
+        console.log(user)
         let idDB = uid()
         let requirePwd = false
 
@@ -72,7 +57,7 @@ module.exports = {
 
         const room = new Room({
             name: req.body.name,
-            users:  [user[0]._id],
+            users:  [user._id],
             img: imgName,
             required_pwd: requirePwd,
             password: bcrypt.hashSync(req.body.pwd),
@@ -81,12 +66,6 @@ module.exports = {
             
         await room.save()
 
-
         res.redirect("/rooms/" + room._id)
-    },
-
-    view: (req, res) => {
-        res.render("newRoom")
     }
-
 }

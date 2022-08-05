@@ -8,17 +8,15 @@ const Image = require('../models/image')
 const validate = require("./login/validate")
 
 function uid(){ return String( Date.now().toString(32) + Math.random().toString(16)).replace(/\./g, '')}
-
+var user
 
 module.exports = {
         
     myAccount: async (req, res) => {
 
-
         try {
 
-            const userVerified = jwt.verify(req.user, process.env.token_secret)
-            const user = await User.findOne({ _id: userVerified._id })
+            user = req.user
 
             Image.findOne({uid: user.image}, (err, items) => {
                 if (!err) {
@@ -36,18 +34,14 @@ module.exports = {
 
     updateAccount: async (req, res) => {
 
-        const userVerified = jwt.verify(token, process.env.token_secret)
-        const user = await User.find({ _id: userVerified._id })
-        if(!user) return res.send("Error in the user")
-
         const { err } = validate.updateValidate(req.body)
-        if(err) return res.send("Error in the form: " + err)
+        if(err) return res.send("Error on the form: " + err)
 
         if(req.file){
             let id = uid()
 
-            if( user[0].image != "image-default" ){
-                await Image.deleteOne({ uid: user[0].image });
+            if( user.image != "image-default" ){
+                await Image.deleteOne({ uid: user.image });
             }
 
             var obj = {
@@ -74,7 +68,7 @@ module.exports = {
         }
 
         async function updateFinily(){
-            await User.updateMany({ _id: user[0]._id }, { $set: { user: req.body.user, phone: req.body.phone } })
+            await User.updateMany({ _id: user._id }, { $set: { user: req.body.user, phone: req.body.phone } })
             res.redirect("/my-account")
         }
     }

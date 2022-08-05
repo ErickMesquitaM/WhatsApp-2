@@ -3,12 +3,14 @@ require("dotenv").config()
 const express = require('express')
 const mongoose = require("mongoose")
 const path = require("path")
+const cookieParser = require('cookie-parser');
 
 const routers = require("./router/router")
 const socket = require("socket.io")
 
 const app = express()
 
+app.use(cookieParser());
 app.use(express.static('public/assets'))
 app.use('/css', express.static(__dirname + 'public/css'))
 app.use('/js', express.static(__dirname + 'public/js'))
@@ -37,4 +39,4 @@ io.on('connection', (socket) => {
         io.emit('message', msg);
     });
 
-});
+})

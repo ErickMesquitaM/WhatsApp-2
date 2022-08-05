@@ -36,7 +36,7 @@ const userController = {
             const newUser = await User.findOne({email: req.body.email})
             const token = jwt.sign({ _id: newUser._id }, process.env.token_secret, {expiresIn: "7d"})
           
-            res.header("authorization-token", token)
+            res.cookie('token', token)
             res.redirect("/my-account")
             
         } catch (error) {
