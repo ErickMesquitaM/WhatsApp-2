@@ -37,6 +37,8 @@ const userController = {
             const token = jwt.sign({ _id: newUser._id }, process.env.token_secret, {expiresIn: "7d"})
           
             res.cookie('token', token)
+            res.cookie('user', selectedUser.user, { httpOnly: false })
+
             res.redirect("/my-account")
             
         } catch (error) {

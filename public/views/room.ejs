@@ -22,8 +22,8 @@
         <header>
 
             <span onclick="back()" id="iconBack" class="material-icons mr-3 ml-3"> arrow_back_ios </span>
-            <h2> <%= room.name %> </h2>
-            <img src="data:image/<%=img.contentType%>;base64, <%=img.data.toString('base64')%>" alt="" class="mr-3 ml-3">
+            <h2 onclick="configRoom()"> <%= room.name %> </h2>
+            <img onclick="configRoom()" src="data:image/<%=img.contentType%>;base64, <%=img.data.toString('base64')%>" alt="" class="mr-3 ml-3">
 
         </header>
 

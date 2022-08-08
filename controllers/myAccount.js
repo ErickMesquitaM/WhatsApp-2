@@ -1,4 +1,3 @@
-const jwt = require("jsonwebtoken")
 const fs = require("fs")
 const path = require("path")
 
@@ -8,6 +7,7 @@ const Image = require('../models/image')
 const validate = require("./login/validate")
 
 function uid(){ return String( Date.now().toString(32) + Math.random().toString(16)).replace(/\./g, '')}
+
 var user
 
 module.exports = {
@@ -68,7 +68,12 @@ module.exports = {
         }
 
         async function updateFinily(){
+            
             await User.updateMany({ _id: user._id }, { $set: { user: req.body.user, phone: req.body.phone } })
+
+            const updateUser = await User.findOne({_id: user._id}) 
+            res.cookie('user', updateUser.user, { httpOnly: false })
+
             res.redirect("/my-account")
         }
     }

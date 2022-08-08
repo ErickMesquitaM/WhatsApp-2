@@ -26,6 +26,8 @@ const userControlls = {
         let token = jwt.sign({ _id: selectedUser._id }, process.env.token_secret)
 
         res.cookie('token', token, { httpOnly: false })
+        res.cookie('user', selectedUser.user, { httpOnly: false })
+
         res.redirect("/my-account")
     },
     view: (req, res) => {

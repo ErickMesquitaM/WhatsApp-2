@@ -1,6 +1,9 @@
 function back(){
     window.location.pathname = "/rooms"
 }
+function configRoom(){
+    window.location.pathname += "/config"
+}
 
 document.getElementById('txt').addEventListener('keypress', function(e) {
     if(e.key == 'Enter'){
@@ -9,9 +12,6 @@ document.getElementById('txt').addEventListener('keypress', function(e) {
 });
 
 var socket = io();
-
-// socket.emit('message', "Bem vindo!");
-
 
 function sendMsg(){
     
@@ -28,7 +28,7 @@ function sendMsg(){
     }
 }
  
-// sempre que receber uma mensagem ela é adicionada a lista
+
 socket.on('chat message', (msg) => {
 
     createMsg("other", msg)

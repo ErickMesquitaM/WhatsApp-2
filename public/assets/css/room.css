@@ -16,11 +16,13 @@ img{
     height: 50px;
     border-radius: 50%;
     border: none;
+    cursor: pointer;
 }
 h2{
     color: white;
     text-align: end;
     overflow: hidden;
+    cursor: pointer;
 }
 span{
     font-weight: bolder;
