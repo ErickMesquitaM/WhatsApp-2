@@ -24,45 +24,34 @@
         <img src="data:image/<%=img.contentType%>;base64, <%=img.data.toString('base64')%>" id="img" class="labelImg" onclick="clickLabel()">
         <input type="file" name="inputImg" id="inputImg">
 
-        <input type="text" name="name" id="name" class="form-control" value="<%= room.name %>">
+        <% if(admin==true){ %>
+            <input type="text" name="name" id="name" class="form-control" value="<%= room.name %>">
+        <% } else { %>
+            <p class="form-control"> <%= room.name %> </p>
+        <% } %>
 
-        <ul id="users" class="bg-light pt-1 pb-1 pr-4 pl-4 mt-3 rounded">
+        <ul id="users" class="bg-light mt-3 rounded">
 
-            <li>Alan Harper</li>
-
-            <li>GreckMM</li>
-            <li>Alan Harper</li>
-
-            <li>GreckMM</li>
-            <li>Alan Harper</li>
-
-            <li>GreckMM</li>
-            <li>Alan Harper</li>
-
-            <li>GreckMM</li>
-            <li>Alan Harper</li>
-
-            <li>GreckMM</li>
-            <li>Alan Harper</li>
-
-            <li>GreckMM</li>
-            <li>Alan Harper</li>
-
-            <li>GreckMM</li>
-            <li>Alan Harper</li>
-
-            <li>GreckMM</li>
-                        <li>Alan Harper</li>
-
-            <li>GreckMM</li>
+            <% if(admin==true){ %>
+                <% users.forEach( user => { %>
+                    <li class="pt-1 pb-1 list-group-item" onclick="redirect('<%=user._id%>')" id="<%= user._id %>"><%= user.user %><span id="iconError" class="material-icons float-right text-danger " onclick="remove(this)"> highlight_off </span></li>
+                <% } ) %>
+            <% } else { %>
+                <% users.forEach( user => { %>
+                    <li class="pt-1 pb-1 list-group-item" onclick="redirect('<%=user._id%>')"><%= user.user %></li>
+                <% } ) %>
+            <% } %>
 
         </ul>
+
 
         <div class="p-4">
 
             <button type="button" class="btn btn-danger">SAIR</button>
-            <button type="button" class="btn btn-primary float-right">ATUALIZAR</button>
 
+            <% if(admin==true){ %>
+                <button type="button" class="btn btn-primary float-right">ATUALIZAR</button>
+            <% } %>
         </div>
 
     </form>

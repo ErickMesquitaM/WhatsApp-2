@@ -58,6 +58,7 @@ module.exports = {
         const room = new Room({
             name: req.body.name,
             users:  [user._id],
+            admin: user._id,
             img: imgName,
             required_pwd: requirePwd,
             password: bcrypt.hashSync(req.body.pwd),
