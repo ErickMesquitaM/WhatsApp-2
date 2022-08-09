@@ -38,5 +38,30 @@ io.on('connection', (socket) => {
         console.log( msg )
         io.emit('message', msg);
     });
-
 })
+/*
+
+CONFIGURAÇÃO DA SALA
+    centralizar a imagem
+    criar um link de convite
+    fazer funçao de:
+        voltar para a sala
+        sair da sala
+        entrar no perfil de um usuário
+        atualizar (para o adm)
+        remover um usuario (para o adm)
+
+FAZER OUTRA ROTA PARA AS CONTAS DE OUTROS USERS
+    sem nenhuma ação, apenas ver o nome, telefone e a foto
+    criar o ejs padrão com:
+        imagem, nome, e se tiver numero de telefone vinculado faezr um capo para ele
+
+MENSAGENS
+    pegar o nome do usuário e colocar na mensagem
+    fazer o filtro com o id pra saber se a mensagem enviada foi pelo usuário logado e colocar uma classe
+    salavar o objeto da mensagem no banco de dados vinculado com a sala 
+
+LINK DE CONVITE
+    se o usuário convidado não estiver logado, mandar para a parte de login com uma mensagem, ex: "Entre com uma conta ou cria uma para poder participar de outras salas"
+
+*/

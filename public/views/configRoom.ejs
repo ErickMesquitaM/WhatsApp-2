@@ -19,7 +19,7 @@
 
     <form id="form" action="/" method="post" enctype="multipart/form-data">
 
-        <span onclick="exit()" id="logout" class="material-icons"> exit </span>
+        <span onclick="back()" id="back" class="material-icons"> arrow_back_ios </span>
 
         <img src="data:image/<%=img.contentType%>;base64, <%=img.data.toString('base64')%>" id="img" class="labelImg" onclick="clickLabel()">
         <input type="file" name="inputImg" id="inputImg">
@@ -35,9 +35,17 @@
             <% if(admin==true){ %>
                 <% users.forEach( user => { %>
                     <li class="pt-1 pb-1 list-group-item" onclick="redirect('<%=user._id%>')" id="<%= user._id %>"><%= user.user %><span id="iconError" class="material-icons float-right text-danger " onclick="remove(this)"> highlight_off </span></li>
+                    <li class="pt-1 pb-1 list-group-item" onclick="redirect('<%=user._id%>')" id="<%= user._id %>"><%= user.user %><span id="iconError" class="material-icons float-right text-danger " onclick="remove(this)"> highlight_off </span></li>
+                    <li class="pt-1 pb-1 list-group-item" onclick="redirect('<%=user._id%>')" id="<%= user._id %>"><%= user.user %><span id="iconError" class="material-icons float-right text-danger " onclick="remove(this)"> highlight_off </span></li>
+                    <li class="pt-1 pb-1 list-group-item" onclick="redirect('<%=user._id%>')" id="<%= user._id %>"><%= user.user %><span id="iconError" class="material-icons float-right text-danger " onclick="remove(this)"> highlight_off </span></li>
+                    <li class="pt-1 pb-1 list-group-item" onclick="redirect('<%=user._id%>')" id="<%= user._id %>"><%= user.user %><span id="iconError" class="material-icons float-right text-danger " onclick="remove(this)"> highlight_off </span></li>
                 <% } ) %>
             <% } else { %>
                 <% users.forEach( user => { %>
+                    <li class="pt-1 pb-1 list-group-item" onclick="redirect('<%=user._id%>')"><%= user.user %></li>
+                    <li class="pt-1 pb-1 list-group-item" onclick="redirect('<%=user._id%>')"><%= user.user %></li>
+                    <li class="pt-1 pb-1 list-group-item" onclick="redirect('<%=user._id%>')"><%= user.user %></li>
+                    <li class="pt-1 pb-1 list-group-item" onclick="redirect('<%=user._id%>')"><%= user.user %></li>
                     <li class="pt-1 pb-1 list-group-item" onclick="redirect('<%=user._id%>')"><%= user.user %></li>
                 <% } ) %>
             <% } %>
