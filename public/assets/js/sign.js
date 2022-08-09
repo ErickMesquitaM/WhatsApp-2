@@ -1,12 +1,9 @@
 
-const spin = document.getElementById('spin')
-
 async function validate(){
-
-    spin.style.display = "block"
 
     var form = document.getElementById("form")
     let pwd = document.getElementById("pwd")
+    let email = document.getElementById("email").value
     let confirmPwd = document.getElementById("confirmPwd")
     let phone = document.getElementById("phone")
 
@@ -14,11 +11,11 @@ async function validate(){
         errorBorder("confirmPwd")
     } else if(isNaN(phone.value)){
         errorBorder("phone")
+    } else if(email.length < 5){
+        errorBorder("email")
     } else {
         await form.submit()
     }
-
-    spin.style.display = "none"
 }
 
 
@@ -41,5 +38,6 @@ function resetBorder(input){
 
     try{
         document.getElementById("iconEmail").style.display = "none"
+        document.getElementById("msnEmail").style.display = "none"
     }catch{}
 }

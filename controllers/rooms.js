@@ -52,5 +52,11 @@ module.exports = {
         } else {
             res.status(404).send("Room Not Found")
         }
+    },
+
+    exit: async (req, res) => {
+        await Room.findOneAndUpdate({_id: req.params.id_room}, { $pull: { users: req.user._id } })
+
+        res.redirect("/rooms")
     }
 }

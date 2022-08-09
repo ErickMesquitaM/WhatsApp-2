@@ -5,7 +5,11 @@ module.exports = async (req, res, next) => {
 
     var token = req.cookies.token
 
-    if (!token) return res.status(401).send("Access Denied: Auth")
+    if (!token) {
+
+        res.cookie('id_room', req.params.id_room)
+        return res.redirect("/login")
+    }
 
     try {
         const userVerified = jwt.verify(token, process.env.token_secret)
@@ -13,6 +17,8 @@ module.exports = async (req, res, next) => {
         req.user = user
         next()
     } catch (error) {
+
+        res.clearCookie("token")
         res.status(401).send("Access Denied: TOKEN ACCESS")
     }
 }

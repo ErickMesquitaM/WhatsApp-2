@@ -34,32 +34,28 @@
 
             <% if(admin==true){ %>
                 <% users.forEach( user => { %>
-                    <li class="pt-1 pb-1 list-group-item" onclick="redirect('<%=user._id%>')" id="<%= user._id %>"><%= user.user %><span id="iconError" class="material-icons float-right text-danger " onclick="remove(this)"> highlight_off </span></li>
-                    <li class="pt-1 pb-1 list-group-item" onclick="redirect('<%=user._id%>')" id="<%= user._id %>"><%= user.user %><span id="iconError" class="material-icons float-right text-danger " onclick="remove(this)"> highlight_off </span></li>
-                    <li class="pt-1 pb-1 list-group-item" onclick="redirect('<%=user._id%>')" id="<%= user._id %>"><%= user.user %><span id="iconError" class="material-icons float-right text-danger " onclick="remove(this)"> highlight_off </span></li>
-                    <li class="pt-1 pb-1 list-group-item" onclick="redirect('<%=user._id%>')" id="<%= user._id %>"><%= user.user %><span id="iconError" class="material-icons float-right text-danger " onclick="remove(this)"> highlight_off </span></li>
-                    <li class="pt-1 pb-1 list-group-item" onclick="redirect('<%=user._id%>')" id="<%= user._id %>"><%= user.user %><span id="iconError" class="material-icons float-right text-danger " onclick="remove(this)"> highlight_off </span></li>
-                <% } ) %>
+                    <li class="pt-1 pb-1 list-group-item" id="<%= user._id %>"><span onclick="redirectUser('<%=user._id%>')"><%= user.user %></span><span id="iconError" class="material-icons float-right text-danger " onclick="remove(this)"> highlight_off </span></li>
+                 <% } ) %>
             <% } else { %>
                 <% users.forEach( user => { %>
-                    <li class="pt-1 pb-1 list-group-item" onclick="redirect('<%=user._id%>')"><%= user.user %></li>
-                    <li class="pt-1 pb-1 list-group-item" onclick="redirect('<%=user._id%>')"><%= user.user %></li>
-                    <li class="pt-1 pb-1 list-group-item" onclick="redirect('<%=user._id%>')"><%= user.user %></li>
-                    <li class="pt-1 pb-1 list-group-item" onclick="redirect('<%=user._id%>')"><%= user.user %></li>
-                    <li class="pt-1 pb-1 list-group-item" onclick="redirect('<%=user._id%>')"><%= user.user %></li>
+                    <li class="pt-1 pb-1 list-group-item"><span onclick="redirectUser('<%=user._id%>')"><%=user.user%></span></li>
                 <% } ) %>
             <% } %>
 
         </ul>
 
+        <div class="d-flex justify-content-end aling-items-center w-100 pr-3 text-primary"> <p class="mr-2" id="link" onclick="copyLink()">copiar link de convite</p> <span id="btnCopy" class="material-icons" onclick="copyLink()"> content_copy </span> </div>
 
-        <div class="p-4">
+        <p id="infoCopy"> Link copiado! </p>
 
-            <button type="button" class="btn btn-danger">SAIR</button>
+        <div class="p-4 w-100">
+
+            <button onclick="exit()" type="button" class="btn btn-danger">SAIR</button>
 
             <% if(admin==true){ %>
-                <button type="button" class="btn btn-primary float-right">ATUALIZAR</button>
+                <button type="button" class="btn btn-success float-right">ATUALIZAR</button>
             <% } %>
+
         </div>
 
     </form>

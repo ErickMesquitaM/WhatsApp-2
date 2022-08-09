@@ -30,7 +30,7 @@
         </div>
 
         <label for="email">Email</label>
-        <input class="form-control" id="email" name="email" type="email" value="<%= data.email %>" required>
+        <input class="form-control" onchange="resetBorder('email')" id="email" name="email" type="email" value="<%= data.email %>" required>
 
         <label for="pwd">Senha</label>
         <input class="form-control" id="pwd" name="pwd" type="password" value="<%= data.pwd %>" required>

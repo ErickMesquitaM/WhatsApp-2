@@ -28,7 +28,11 @@ const userControlls = {
         res.cookie('token', token, { httpOnly: false })
         res.cookie('user', selectedUser.user, { httpOnly: false })
 
-        res.redirect("/my-account")
+        if( req.cookies.id_room ){
+            res.redirect("/rooms/" + req.cookies.id_room)
+        } else {
+            res.redirect("/my-account")
+        }
     },
     view: (req, res) => {
         res.render("login", {data: datas})

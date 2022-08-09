@@ -34,13 +34,17 @@ const userController = {
             await user.save()
 
             const newUser = await User.findOne({email: req.body.email})
-            const token = jwt.sign({ _id: newUser._id }, process.env.token_secret, {expiresIn: "7d"})
+            const token = jwt.sign({ _id: newUser._id }, process.env.token_secret)
           
             res.cookie('token', token)
-            res.cookie('user', selectedUser.user, { httpOnly: false })
+            res.cookie('user', newUser.user, { httpOnly: false })
 
-            res.redirect("/my-account")
-            
+            if( req.cookies.id_room ){
+                res.redirect("/rooms/" + req.cookies.id_room)
+            } else {
+                res.redirect("/my-account")
+            }
+
         } catch (error) {
             res.status(400).send("Erro ao criar o usuário: " + error)
         }

@@ -39,8 +39,9 @@ input{
 }
 
 #iconEmail{
+    cursor: pointer;
     position: absolute;
-    top: 165px;
+    top: 95px;
     right: 0px;
 
     color: red;
@@ -53,9 +54,8 @@ input{
     border-radius: 3px 3px 0 3px;
     
     position: absolute;
-    top: 140px;
+    top: 70px;
     right: 25px;
 
     display: none;
-    cursor: pointer;
 }
