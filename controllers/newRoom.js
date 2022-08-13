@@ -20,7 +20,6 @@ module.exports = {
 
     new: async (req, res) => {
 
-        console.log(user)
         let idDB = uid()
         let requirePwd = false
 

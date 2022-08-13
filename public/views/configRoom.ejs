@@ -16,8 +16,7 @@
 <body>
 
 
-
-    <form id="form" action="/" method="post" enctype="multipart/form-data">
+    <form id="form" action="/rooms/<%=room._id%>/update" method="post" enctype="multipart/form-data">
 
         <span onclick="back()" id="back" class="material-icons"> arrow_back_ios </span>
 
@@ -58,7 +57,7 @@
             <button onclick="exit()" type="button" class="btn btn-danger">SAIR</button>
 
             <% if(admin==true){ %>
-                <button type="button" class="btn btn-success float-right">ATUALIZAR</button>
+                <button class="btn btn-success float-right">ATUALIZAR</button>
             <% } %>
 
         </div>
