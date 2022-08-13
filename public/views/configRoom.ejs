@@ -21,8 +21,13 @@
 
         <span onclick="back()" id="back" class="material-icons"> arrow_back_ios </span>
 
-        <img src="data:image/<%=img.contentType%>;base64, <%=img.data.toString('base64')%>" id="img" class="labelImg" onclick="clickLabel()">
-        <input type="file" name="inputImg" id="inputImg">
+        <% if(admin==true){ %>
+            <img src="data:image/<%=img.contentType%>;base64, <%=img.data.toString('base64')%>" id="img" class="labelImg" onclick="clickLabel()">
+            <input type="file" name="inputImg" id="inputImg">
+        <% } else { %>
+            <img src="data:image/<%=img.contentType%>;base64, <%=img.data.toString('base64')%>"class="labelImg">
+        <% } %>
+
 
         <% if(admin==true){ %>
             <input type="text" name="name" id="name" class="form-control" value="<%= room.name %>">

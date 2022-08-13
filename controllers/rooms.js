@@ -31,13 +31,14 @@ module.exports = {
 
     redirectRoom: async (req, res) => {
 
-        var room
         var user = req.user
 
         try{
-            room = await Room.findOne({ _id: req.params.id_room})
+            var room = await Room.findOne({ _id: req.params.id_room})
             var img = await Img.findOne({ uid: room.img })
-        } catch {}
+        } catch {
+            return res.status(404).send("Access Denied")
+        }
 
         if(room){
     
@@ -56,6 +57,16 @@ module.exports = {
 
     exit: async (req, res) => {
         await Room.findOneAndUpdate({_id: req.params.id_room}, { $pull: { users: req.user._id } })
+        
+        const room = await Room.findOne({_id: req.params.id_room})
+        
+        if(room.users.length == 0){
+
+            if( room.img != "image-default-room" ){
+                await Img.deleteOne({ uid: room.img})
+            }
+            await Room.deleteOne({_id: room._id})
+        }
 
         res.redirect("/rooms")
     }

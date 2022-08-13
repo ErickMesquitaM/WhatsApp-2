@@ -7,11 +7,15 @@ var user
 module.exports = {
 
     view: async (req, res) => {
-        
-        const room = await Room.findOne({_id: req.params.id_room})
-        const image = await Image.findOne({ uid: room.img})
-
         user = req.user
+
+        try {
+            var room = await Room.findOne({_id: req.params.id_room, users: user._id})
+            var image = await Image.findOne({ uid: room.img})
+        } catch {
+            return res.status(404).send("Access Denied")
+        }
+
         var users = []
         
         await room.users.forEach( async (userId) => {
@@ -26,7 +30,7 @@ module.exports = {
             const admin = room.admin == user._id
             res.render("configRoom", {room, img: image.img, users, admin})
 
-        },1000 )
+        }, 400 )
     },
 
     update: (req, res) => {

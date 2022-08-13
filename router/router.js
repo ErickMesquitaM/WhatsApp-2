@@ -44,6 +44,8 @@ router.get("/user/:id_user", visitUser)
 router.get("/rooms/:id_room/enter", auth, enterRoom.view)
 router.post("/rooms/:id_room/enter", express.urlencoded({extended: true}), enterRoom.enter)
 
+router.post("/rooms/:id_room/update", express.urlencoded({extended: true}), enterRoom.enter)
+
 router.get("/rooms/:id_room/config", auth, configRoom.view)
 router.post("/rooms/:id_room/config", express.urlencoded({extended: true}), configRoom.update)
 

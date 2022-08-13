@@ -42,14 +42,7 @@ io.on('connection', (socket) => {
 /*
 
 CONFIGURAÇÃO DA SALA
-    centralizar a imagem   ***
-    criar um link de convite ***
-    criar algo de dizer q o link foi copiado ***
-    arrumar o erro no auth, de entrar em uma sala sem estiver logado ***
     fazer funçao de:
-        voltar para a sala***
-        sair da sala ***
-        entrar no perfil de um usuário
         atualizar (para o adm)
         remover um usuario (para o adm)
 
