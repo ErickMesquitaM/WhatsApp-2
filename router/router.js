@@ -49,7 +49,10 @@ router.post("/rooms/:id_room/update", upload.single('inputImg'), configRoom.upda
 
 router.get("/rooms/:id_room/exit", auth, rooms.exit)
 
+router.get("/rooms/:id_room/:id_user", auth, configRoom.removeUser)
+
 router.get("/rooms/:id_room", auth, rooms.redirectRoom)
+
 router.get("/rooms", auth, rooms.view)
 
 router.get("/new-room", auth, newRoom.view)

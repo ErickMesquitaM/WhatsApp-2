@@ -80,7 +80,21 @@ module.exports = {
         setTimeout( () => { res.redirect("/rooms/" + req.params.id_room) }, 400 )
     },
 
-    exit: (req, res) => {
-        res.send("sair")
+    removeUser: async (req, res) => {
+
+        const room = await Room.findOne({ _id: req.params.id_room })
+
+        if(user._id == room.admin){
+
+            try{
+                await Room.findOneAndUpdate({_id: req.params.id_room}, { $pull: { users: "ObjectId('" + req.params.id_user + "')" } })
+                res.redirect("/rooms/" + req.params.id_room)
+            } catch{
+                res.status(401).send("Access Denied")
+            }
+
+        } else {
+            res.status(401).send("Access Denied")
+        }
     }
 }

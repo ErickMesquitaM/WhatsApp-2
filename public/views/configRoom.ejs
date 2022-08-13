@@ -38,7 +38,7 @@
 
             <% if(admin==true){ %>
                 <% users.forEach( user => { %>
-                    <li class="pt-1 pb-1 list-group-item" id="<%= user._id %>"><span onclick="redirectUser('<%=user._id%>')"><%= user.user %></span><span id="iconError" class="material-icons float-right text-danger " onclick="remove(this)"> highlight_off </span></li>
+                    <li class="pt-1 pb-1 list-group-item"><span onclick="redirectUser('<%=user._id%>')"><%= user.user %></span><span id="<%= user._id %>" class="material-icons float-right text-danger " onclick="remove(this)"> highlight_off </span></li>
                  <% } ) %>
             <% } else { %>
                 <% users.forEach( user => { %>

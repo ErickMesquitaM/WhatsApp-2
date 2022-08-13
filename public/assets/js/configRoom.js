@@ -35,6 +35,13 @@ function redirectUser(id){
     window.location.pathname = "user/" + id
 }
 
+function remove(elem){
+    let path = window.location.pathname
+    let link = path.slice(0, path.length - 6 ) + elem.attributes.id.value
+
+    window.location.pathname = link
+}
+
 
 function copyLink(){
     let link = window.location.href.slice(0, this.length - 7)
