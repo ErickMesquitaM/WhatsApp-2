@@ -42,13 +42,9 @@ io.on('connection', (socket) => {
 
 /*
 
-CONFIGURAÇÃO DA SALA
-    fazer funçao de:
-        remover um usuario (para o adm)
+
 
 DIMINUIR A IMAGEM AO USAR NO PERFIL OU NO PERFIL DA SALA
-
-Arrumar se o admin sair, outra pessoa virar o admin
 
 MENSAGENS
     pegar o nome do usuário e colocar na mensagem

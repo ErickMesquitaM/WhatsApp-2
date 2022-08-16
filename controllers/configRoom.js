@@ -1,3 +1,4 @@
+const mongoose = require("mongoose")
 const fs = require("fs")
 const path = require('path')
 
@@ -83,13 +84,17 @@ module.exports = {
     removeUser: async (req, res) => {
 
         const room = await Room.findOne({ _id: req.params.id_room })
+        const id = mongoose.Types.ObjectId( req.params.id_user );
 
         if(user._id == room.admin){
 
             try{
-                await Room.findOneAndUpdate({_id: req.params.id_room}, { $pull: { users: "ObjectId('" + req.params.id_user + "')" } })
-                res.redirect("/rooms/" + req.params.id_room)
-            } catch{
+
+                await Room.updateOne({ room }, { $pull: { users: id } })
+                res.redirect("/rooms/" + req.params.id_room + "/config")
+
+            } catch(err){
+                console.log(err)
                 res.status(401).send("Access Denied")
             }
 

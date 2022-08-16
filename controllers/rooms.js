@@ -56,8 +56,8 @@ module.exports = {
     },
 
     exit: async (req, res) => {
-        await Room.findOneAndUpdate({_id: req.params.id_room}, { $pull: { users: req.user._id } })
-        
+
+        await Room.findOneAndUpdate({_id: req.params.id_room}, { $pull: { users: req.user._id } })        
         const room = await Room.findOne({_id: req.params.id_room})
         
         if(room.users.length == 0){
@@ -66,8 +66,14 @@ module.exports = {
                 await Img.deleteOne({ uid: room.img})
             }
             await Room.deleteOne({_id: room._id})
+        
+        } else if( room.admin == req.user._id ){
+
+            await Room.updateOne({ room }, { admin: room.users[0] })
         }
 
         res.redirect("/rooms")
     }
 }
+
+//http://localhost:3000/rooms/62f7d627e86be9a4c4fe6c81

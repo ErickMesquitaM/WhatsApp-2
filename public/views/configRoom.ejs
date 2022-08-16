@@ -37,13 +37,29 @@
         <ul id="users" class="bg-light mt-3 rounded">
 
             <% if(admin==true){ %>
+            
                 <% users.forEach( user => { %>
-                    <li class="pt-1 pb-1 list-group-item"><span onclick="redirectUser('<%=user._id%>')"><%= user.user %></span><span id="<%= user._id %>" class="material-icons float-right text-danger " onclick="remove(this)"> highlight_off </span></li>
-                 <% } ) %>
-            <% } else { %>
-                <% users.forEach( user => { %>
-                    <li class="pt-1 pb-1 list-group-item"><span onclick="redirectUser('<%=user._id%>')"><%=user.user%></span></li>
+            
+                    <li class="pt-1 pb-1 list-group-item">
+                        <span onclick="redirectUser('<%=user._id%>')"><%= user.user %></span>
+
+                        <% if(user._id != room.admin){ %>
+                            <span id="<%= user._id %>" class="material-icons float-right text-danger " onclick="remove(this)"> highlight_off </span>
+                        <% } %>
+                    </li>
+                
                 <% } ) %>
+    
+             <% } else { %>
+
+                <% users.forEach( user => { %>
+    
+                    <li class="pt-1 pb-1 list-group-item">
+                        <span onclick="redirectUser('<%=user._id%>')"><%=user.user%></span>
+                    </li>
+        
+                <% } ) %>
+            
             <% } %>
 
         </ul>
