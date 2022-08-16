@@ -1,12 +1,11 @@
 const mongoose = require("mongoose")
 const fs = require("fs")
 const path = require('path')
+const sharp = require('sharp');
 
 const Image = require("../models/image")
 const Room = require("../models/rooms")
 const User = require("../models/user")
-
-function uid(){ return String( Date.now().toString(32) + Math.random().toString(16)).replace(/\./g, '')}
 
 var user
 
@@ -51,6 +50,15 @@ module.exports = {
                     await Image.findOneAndDelete({ uid: room.img })
                 }
 
+                let pathImage = path.join(__dirname + '/../uploads/' + req.file.filename)
+
+                sharp(pathImage).resize(170).toFile('./uploads/' + req.file.filename + '.png', (err, info) => { 
+                    
+                    if( err ) throw res.send(err)
+            
+                    fs.unlink("uploads/" + req.file.filename, (err) => { console.log(err) })
+                });
+
 
                 var obj = {
                     uid: req.file.filename,
@@ -60,12 +68,13 @@ module.exports = {
                     }
                 }
 
+
                 Image.create(obj, async (err, item) => {
                     if(!err) {
                         await item.save()
                         await Room.updateOne({ room }, { $set: { img: req.file.filename } });
     
-                        fs.unlink("uploads/" + req.file.filename, (err) => { console.log(err) })
+                        fs.unlink("uploads/" + req.file.filename + ".png", (err) => { console.log(err) })
                     } else {
                         res.send(err)
                     }

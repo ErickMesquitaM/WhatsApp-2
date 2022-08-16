@@ -75,5 +75,3 @@ module.exports = {
         res.redirect("/rooms")
     }
 }
-
-//http://localhost:3000/rooms/62f7d627e86be9a4c4fe6c81

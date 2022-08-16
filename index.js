@@ -42,10 +42,6 @@ io.on('connection', (socket) => {
 
 /*
 
-
-
-DIMINUIR A IMAGEM AO USAR NO PERFIL OU NO PERFIL DA SALA
-
 MENSAGENS
     pegar o nome do usuário e colocar na mensagem
     fazer o filtro com o id pra saber se a mensagem enviada foi pelo usuário logado e colocar uma classe

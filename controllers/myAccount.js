@@ -1,12 +1,11 @@
 const fs = require("fs")
 const path = require("path")
+const sharp = require('sharp');
 
 const User = require("../models/user")
 const Image = require('../models/image')
 
 const validate = require("./login/validate")
-
-function uid(){ return String( Date.now().toString(32) + Math.random().toString(16)).replace(/\./g, '')}
 
 var user
 
@@ -38,38 +37,48 @@ module.exports = {
         if(err) return res.send("Error on the form: " + err)
 
         if(req.file){
-            let id = uid()
 
             if( user.image != "image-default" ){
                 await Image.deleteOne({ uid: user.image });
             }
 
+            let pathImage = path.join(__dirname + '/../uploads/' + req.file.filename)
+
+            sharp(pathImage).resize(170).toFile('./uploads/' + req.file.filename + '.png', (err, info) => { 
+                
+                if( err ) throw res.send(err)
+        
+                fs.unlink("uploads/" + req.file.filename, (err) => { console.log(err) })
+            });
+
             var obj = {
-                uid: id,
+                uid: req.file.filename,
                 img: {
                     data: fs.readFileSync(path.join(__dirname + '/../uploads/' + req.file.filename)),
                     contentType: 'image/png'
                 }
             }
+
             Image.create(obj, async (err, item) => {
                 if(!err) {
                     await item.save()
-                    await User.updateMany({_id: user[0]._id}, { $set: { image: id } });
+                    await User.findOneAndUpdate({ _id: user._id }, { $set: { image: req.file.filename } });
 
-                    fs.unlink("uploads/" + req.file.filename, (err) => { console.log(err) })
+                    fs.unlink("uploads/" + req.file.filename + ".png", (err) => { console.log(err) })
 
                     updateFinily()
                 } else {
                     res.send(err)
                 }
             })
+
         } else {
             updateFinily()
         }
 
         async function updateFinily(){
             
-            await User.updateMany({ _id: user._id }, { $set: { user: req.body.user, phone: req.body.phone } })
+            await User.findOneAndUpdate({ _id: user._id }, { $set: { user: req.body.user, phone: req.body.phone } })
 
             const updateUser = await User.findOne({_id: user._id}) 
             res.cookie('user', updateUser.user, { httpOnly: false })

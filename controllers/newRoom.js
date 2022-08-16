@@ -1,14 +1,14 @@
 const bcrypt = require("bcryptjs")
 const fs = require("fs")
 const path = require("path")
+const sharp = require('sharp');
 
-const User = require("../models/user")
 const Img = require("../models/image")
 const Room = require("../models/rooms")
 const DbMsg = require("../models/dbMsg")
 
-
 function uid(){ return String( Date.now().toString(32) + Math.random().toString(16)).replace(/\./g, '')}
+
 var user
 
 module.exports = {
@@ -32,6 +32,15 @@ module.exports = {
         if(req.file){
             imgName = req.file.filename
 
+            let pathImage = path.join(__dirname + '/../uploads/' + imgName)
+
+            sharp(pathImage).resize(170).toFile('./uploads/' + imgName + '.png', (err, info) => { 
+                
+                if( err ) throw res.send(err)
+        
+                fs.unlink("uploads/" + req.file.filename, (err) => { console.log(err) })
+            });
+
             var obj = {
                 uid: imgName,
                 img: {
@@ -42,7 +51,7 @@ module.exports = {
             Img.create(obj, async (err, item) => {
                 if(!err) {
                     await item.save()
-                    fs.unlink("uploads/" + req.file.filename, (err) => { console.log(err) })
+                    fs.unlink("uploads/" + req.file.filename + ".png", (err) => { console.log(err) })
                 
                 } else {
                     res.send(err)
@@ -61,7 +70,7 @@ module.exports = {
             img: imgName,
             required_pwd: requirePwd,
             password: bcrypt.hashSync(req.body.pwd),
-            db_msg_id: req.body.name + idDB,
+            db_msg_id: idDB,
         })
             
         await room.save()
