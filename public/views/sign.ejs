@@ -22,7 +22,7 @@
         <div class="info">
             
             <label for="user">Usuário</label>
-            <label for="phone">Número (opcional)</label>
+            <label id="labelPhone" for="phone">Número (opcional)</label>
 
             <input class="form-control" id="user" name="user" type="text" value="<%= data.user %>" required>
             <input class="form-control" id="phone" name="phone"  onchange="resetBorder('phone')" value="<%= data.phone %>" type="tel" placeholder="DDD número (tudo junto)" min="11" max="11">

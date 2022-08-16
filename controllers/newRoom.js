@@ -5,7 +5,8 @@ const sharp = require('sharp');
 
 const Img = require("../models/image")
 const Room = require("../models/rooms")
-const DbMsg = require("../models/dbMsg")
+const DbMsg = require("../models/dbMsg");
+
 
 function uid(){ return String( Date.now().toString(32) + Math.random().toString(16)).replace(/\./g, '')}
 
@@ -62,6 +63,7 @@ module.exports = {
             imgName = "image-default-room"
         }
 
+        let id = uid()
 
         const room = new Room({
             name: req.body.name,
@@ -70,10 +72,17 @@ module.exports = {
             img: imgName,
             required_pwd: requirePwd,
             password: bcrypt.hashSync(req.body.pwd),
-            db_msg_id: idDB,
+
+            db_msg_id: id,
+        })
+
+        const dbMsg = new DbMsg({
+            db_msg_id: id,
+            msgs: [],
         })
             
         await room.save()
+        await dbMsg.save()
 
         res.redirect("/rooms/" + room._id)
     }

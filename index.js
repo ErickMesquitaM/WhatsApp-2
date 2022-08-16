@@ -8,6 +8,9 @@ const cookieParser = require('cookie-parser');
 const routers = require("./router/router")
 const socket = require("socket.io")
 
+const Room = require("./models/rooms")
+const DbMsg = require("./models/dbMsg");
+
 const app = express()
 
 app.use(cookieParser());
@@ -34,18 +37,16 @@ const io = socket(server)
 
 io.on('connection', (socket) => {
 
-    socket.on('message', (msg) => {
-        console.log( msg )
-        io.emit('message', msg);
+    let id = socket.handshake.headers.referer.slice(28)
+
+    socket.on(id, async (elem) => {
+
+        let room = await Room.findOne({_id: id})
+        await DbMsg.findOneAndUpdate({ db_msg_id: room.db_msg_id }, { $addToSet: { msgs: {  id_user: elem.idUser, msg: elem.msg } } })
+
+        io.emit(id, elem);
     });
 })
 
-/*
 
-MENSAGENS
-    pegar o nome do usuário e colocar na mensagem
-    fazer o filtro com o id pra saber se a mensagem enviada foi pelo usuário logado e colocar uma classe
-    salavar o objeto da mensagem no banco de dados vinculado com a sala 
-
-
-*/
+// fala redimencionar algumas coisas

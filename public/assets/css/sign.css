@@ -59,3 +59,51 @@ input{
 
     display: none;
 }
+
+
+@media screen and (max-width: 620px) {
+    
+    .info{
+        display: grid;
+        grid-template: .4fr 1fr .4fr 1fr / 1fr;
+        gap: 0 20px;
+    }
+
+    #labelPhone{
+        position: relative;
+        top: 55px;
+    }
+    #user{
+        position: relative;
+        bottom: 40px;
+    }
+
+    .logo{
+        width: 130px;
+    }
+    
+    form{
+        width: 400px;
+    }
+    #iconEmail{
+        top: 180px;
+    }
+    #msnEmail{
+        top: 160px;
+    }
+}
+
+
+@media screen and (max-width: 400px) {
+    
+    form{
+        width: 340px;
+    }
+
+    #iconEmail{
+        top: 180px;
+    }
+    #msnEmail{
+        top: 160px;
+    }
+}

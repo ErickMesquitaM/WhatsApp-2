@@ -38,6 +38,7 @@ const userController = {
           
             res.cookie('token', token)
             res.cookie('user', newUser.user, { httpOnly: false })
+            res.cookie('id_user', newUser._id, { httpOnly: false })
 
             if( req.cookies.id_room ){
                 res.redirect("/rooms/" + req.cookies.id_room)

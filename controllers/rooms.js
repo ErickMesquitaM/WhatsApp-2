@@ -10,7 +10,6 @@ module.exports = {
     createNewRoom: (req, res) => {
 
         res.render("rooms")
-
     },
 
 
@@ -44,8 +43,23 @@ module.exports = {
     
             var userFind = await Room.findOne({ _id: room._id, users: user._id })
 
+            var dbMsg = await DbMsg.findOne({ db_msg_id: room.db_msg_id })
+            var users = []
+
+
+            await room.users.forEach( async (user) => {
+                users.push({ _id: user,
+                            user: await User.findOne({ _id: user })  })  
+            });
+
             if(userFind){
-                res.render("room", {room, img: img.img, user: user.user})
+
+                setTimeout( () => {
+                
+                    res.render("room", {room, img: img.img, user: user._id, msgs: dbMsg.msgs, users})
+                
+                }, 1000)
+
             } else {
                 res.redirect("/rooms/" + req.params.id_room + "/enter")
             }

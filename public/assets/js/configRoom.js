@@ -35,9 +35,9 @@ function redirectUser(id){
     window.location.pathname = "user/" + id
 }
 
-function remove(elem){
+function remove(id){
     let path = window.location.pathname
-    let link = path.slice(0, path.length - 6 ) + elem.attributes.id.value
+    let link = path.slice(0, path.length - 6 ) + id
 
     window.location.pathname = link
 }

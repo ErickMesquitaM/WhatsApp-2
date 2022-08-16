@@ -27,7 +27,34 @@
 
         </header>
 
-        <ul id="messages"></ul>
+        <ul id="messages">
+
+
+
+            <% msgs.forEach( (msg) => { %>
+
+                
+                <% if(msg.id_user == user){ %>
+                
+                    <li class="msgUser"><div>
+    
+                <% } else { %>
+
+                    <li> <div>
+
+                <% } %>
+
+                    <% let nameUser = users.filter( user => user.user._id == msg.id_user) %>
+
+                    <h5><%=nameUser[0].user.user%></h5>
+                    <p><%=msg.msg%></p>
+
+                </div></li>
+            
+            <% }) %>
+
+
+        </ul>
 
         <div id="msg" class="pt-2 pb-2">
 

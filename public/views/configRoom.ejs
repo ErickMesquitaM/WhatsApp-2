@@ -44,7 +44,7 @@
                         <span onclick="redirectUser('<%=user._id%>')"><%= user.user %></span>
 
                         <% if(user._id != room.admin){ %>
-                            <span id="<%= user._id %>" class="material-icons float-right text-danger " onclick="remove(this)"> highlight_off </span>
+                            <span class="material-icons float-right text-danger " onclick="remove('<%=user._id%>')"> highlight_off </span>
                         <% } %>
                     </li>
                 

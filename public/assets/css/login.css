@@ -48,3 +48,31 @@ a{
     display: none;
     cursor: pointer;
 }
+
+
+@media screen and (max-width: 600px) {
+
+    .logo{
+        width: 130px;
+        margin-bottom: 30px;
+    }
+
+    .form{
+        width: 350px;
+        gap: 20px 0;
+    }
+    .btn{
+        padding: 3px;
+    }
+}
+@media screen and (max-width: 600px) {
+
+    .logo{
+        width: 130px;
+        margin-bottom: 40px;
+    }
+
+    .form{
+        width: 340px;
+    }
+}

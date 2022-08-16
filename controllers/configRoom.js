@@ -32,7 +32,7 @@ module.exports = {
 
         setTimeout( () => {
 
-            const admin = room.admin == user._id
+            let admin = room.admin == user._id
             res.render("configRoom", {room, img: image.img, users, admin})
 
         }, 400 )
@@ -40,7 +40,7 @@ module.exports = {
 
     update: async (req, res) => {
 
-        const room = await Room.findOne({ _id: req.params.id_room })
+        let room = await Room.findOne({ _id: req.params.id_room })
     
         if(user._id == room.admin){
 
@@ -92,19 +92,19 @@ module.exports = {
 
     removeUser: async (req, res) => {
 
-        const room = await Room.findOne({ _id: req.params.id_room })
-        const id = mongoose.Types.ObjectId( req.params.id_user );
+        let room = await Room.findOne({ _id: req.params.id_room })
+        let id = mongoose.Types.ObjectId( req.params.id_user );
 
         if(user._id == room.admin){
 
             try{
 
-                await Room.updateOne({ room }, { $pull: { users: id } })
+                await Room.findOneAndUpdate({ _id: req.params.id_room }, { $pull: { users: id } })
                 res.redirect("/rooms/" + req.params.id_room + "/config")
 
             } catch(err){
                 console.log(err)
-                res.status(401).send("Access Denied")
+                res.status(401).send("error: Access Denied")
             }
 
         } else {

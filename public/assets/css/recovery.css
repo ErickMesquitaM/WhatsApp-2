@@ -64,3 +64,19 @@ label{
     cursor: pointer;
 }
 
+@media screen and (max-width: 550px) {
+
+    .logo{
+        width: 130px;
+    }
+
+    :root{
+        --width: 400px;
+    }
+}
+@media screen and (max-width: 400px) {
+
+    :root{
+        --width: 340px;
+    }
+}

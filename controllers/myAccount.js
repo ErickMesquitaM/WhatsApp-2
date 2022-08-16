@@ -82,6 +82,8 @@ module.exports = {
 
             const updateUser = await User.findOne({_id: user._id}) 
             res.cookie('user', updateUser.user, { httpOnly: false })
+            res.cookie('id_user', updateUser._id, { httpOnly: false })
+
 
             res.redirect("/my-account")
         }
