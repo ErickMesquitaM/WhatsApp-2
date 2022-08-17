@@ -4,7 +4,7 @@
   "description": "Projeto de bate-papo | Project chat | Projetito de conversasion caliente",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
