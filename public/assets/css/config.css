@@ -76,3 +76,27 @@ input:focus{
     right: 20px;
     cursor: pointer;
 }
+
+@media screen and (max-width: 550px) {
+    form{
+        width: 400px;
+    }
+
+    .labelImg{
+        width: 150px;
+        height: 150px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+
+    form{
+        width: 340px;
+    }
+
+    .labelImg{
+        margin-top: 70px;
+        width: 150px;
+        height: 150px;
+    }
+}

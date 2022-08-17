@@ -47,6 +47,3 @@ io.on('connection', (socket) => {
         io.emit(id, elem);
     });
 })
-
-
-// fala redimencionar algumas coisas

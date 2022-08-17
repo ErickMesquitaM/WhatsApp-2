@@ -52,9 +52,22 @@ li{
 h3{
     margin: 0;
 }
-h4{
-    width: 100%;
-    text-align: center;
-    position: relative;
-    top: 100px;
+
+
+
+@media screen and (max-width: 400px){
+    article{
+        width: 340px;
+    }
+    
+    ul{
+        width: 340px;
+    }
+    .imgRoom{
+        width: 40px;
+        height: 40px;
+    }
+    h3{
+        font-size: 18px;
+    }
 }

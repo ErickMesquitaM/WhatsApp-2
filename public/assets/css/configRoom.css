@@ -52,3 +52,10 @@ span, #link{
     display: none;
     opacity: 0%;
 }
+
+
+@media screen and (max-width: 450px){
+    form{
+        width: 340px;
+    }
+}
