@@ -4,7 +4,7 @@ para ver ele rodando, dar um "npm start" na raiz do arquivo<br>
 
 Frameworks usadas = [<br>
   "express", // para gerenciamento de rotas<br>
-  "dotenv", // para aramazenar alguns dados
+  "dotenv", // para aramazenar alguns dados<br>
   "ejs", // para fazer as pagínas<br>
   "jsonwebtoken", // para gerar um token de acesso do usuario<br>
   "cookie-parser", // para armazenar o token do usuário<br>
